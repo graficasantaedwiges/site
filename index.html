@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280, initial-scale=1.0">
+<title>Gráfica Santa Edwiges – 51 Anos Imprimindo Qualidade</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #f7f3ee;
+    --bg2: #ede9e2;
+    --bg3: #e8e2d9;
+    --ink: #1a1a1a;
+    --ink2: #2c2c2c;
+    --red: #c8281e;
+    --red-dark: #8f1912;
+    --red-glow: rgba(200,40,30,0.2);
+    --gold: #b8860b;
+    --gold-light: #d4a017;
+    --muted: #7a7060;
+    --white: #ffffff;
+    --border: rgba(0,0,0,0.1);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 13px;
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0.5rem 2.5rem;
+    background: rgba(247,243,238,0.96);
+    backdrop-filter: blur(16px);
+    border-bottom: 2px solid var(--red);
+    transition: padding 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%; max-width: 1280px;
+  }
+  nav.scrolled { padding: 0.3rem 2.5rem; box-shadow: 0 4px 28px rgba(0,0,0,0.12); }
+  .nav-logo img {
+    height: 52px;
+    display: block;
+    transition: height 0.3s;
+  }
+  nav.scrolled .nav-logo img { height: 40px; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--ink2);
+    font-size: 0.69rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+    height: 2px; background: var(--red); transform: scaleX(0);
+    transition: transform 0.2s;
+  }
+  .nav-links a:hover { color: var(--red); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-cta {
+    background: var(--red); color: white; border: none;
+    padding: 0.5rem 1.2rem; border-radius: 2px;
+    font-family: 'Montserrat', sans-serif; font-size: 0.68rem;
+    font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer; text-decoration: none;
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+    box-shadow: 0 2px 12px var(--red-glow);
+  }
+  .nav-cta:hover { background: #e02d22; transform: translateY(-1px); box-shadow: 0 4px 20px var(--red-glow); }
+
+  /* ─── HERO ─── */
+  .hero {
+    padding-top: 74px;
+    background: var(--ink);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 74px);
+    max-width: 1280px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .hero-outer {
+    background: var(--ink);
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Hero content — esquerda */
+  .hero-content {
+    padding: 3rem 3rem 3rem 4rem;
+    display: flex; flex-direction: column;
+    justify-content: center;
+    background: var(--ink);
+  }
+
+  /* ─── CARROSSEL — direita ─── */
+  .carousel-wrap {
+    position: relative;
+    overflow: hidden;
+    min-height: 480px;
+  }
+  .carousel {
+    position: absolute; inset: 0;
+    overflow: hidden;
+  }
+  .carousel-track {
+    display: flex; height: 100%; width: 100%;
+    transition: transform 0.8s cubic-bezier(0.77,0,0.175,1);
+    will-change: transform;
+  }
+  .carousel-slide {
+    width: 100%; min-width: 100%; height: 100%; position: relative; flex-shrink: 0;
+    overflow: hidden;
+  }
+  .carousel-slide img {
+    width: 100%; height: 100%; object-fit: cover;
+    object-position: center;
+  }
+  .carousel-slide::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%);
+  }
+
+  /* Carousel label */
+  .carousel-label {
+    position: absolute; bottom: 3.5rem; left: 1.5rem; z-index: 10;
+    background: var(--red); color: white;
+    font-family: 'Bebas Neue', sans-serif; font-size: 0.85rem;
+    letter-spacing: 0.12em; padding: 0.35rem 0.9rem; border-radius: 2px;
+    box-shadow: 0 2px 12px var(--red-glow);
+  }
+
+  /* Carousel controls */
+  .carousel-btn {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
+    background: rgba(17,17,17,0.55); color: white; border: none;
+    width: 38px; height: 38px; border-radius: 50%;
+    font-size: 0.95rem; cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: background 0.2s, transform 0.2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .carousel-btn:hover { background: var(--red); transform: translateY(-50%) scale(1.08); }
+  .carousel-btn.prev { left: 0.8rem; }
+  .carousel-btn.next { right: 0.8rem; }
+
+  .carousel-dots {
+    position: absolute; bottom: 1.2rem; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 7px; z-index: 10;
+  }
+  .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: rgba(255,255,255,0.4); cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .dot.active { background: var(--red); transform: scale(1.4); }
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.22em;
+    text-transform: uppercase; color: #ff6b5a;
+    margin-bottom: 1.6rem;
+    opacity: 0; transform: translateY(16px);
+    animation: slideUp 0.7s ease 0.4s forwards;
+  }
+  .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 2px; background: var(--red); }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    line-height: 0.92; letter-spacing: 0.02em;
+    color: white; margin-bottom: 1.2rem;
+    opacity: 0; transform: translateY(20px);
+    animation: slideUp 0.8s ease 0.55s forwards;
+  }
+  .hero-title .red { color: var(--red); }
+  .hero-slogan {
+    font-size: 0.85rem; font-weight: 300; color: rgba(255,255,255,0.72);
+    line-height: 1.65; margin-bottom: 2rem;
+    opacity: 0; transform: translateY(16px);
+    animation: slideUp 0.7s ease 0.75s forwards;
+  }
+  .hero-slogan strong { color: white; font-weight: 600; }
+  .hero-btns {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0; transform: translateY(16px);
+    animation: slideUp 0.7s ease 0.9s forwards;
+  }
+  .btn-primary {
+    background: var(--red); color: white; padding: 0.7rem 1.6rem;
+    border: 2px solid var(--red); border-radius: 2px; font-size: 0.69rem;
+    font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.2s;
+    box-shadow: 0 4px 20px var(--red-glow);
+  }
+  .btn-primary:hover { background: transparent; color: var(--red); }
+  .btn-outline-white {
+    background: transparent; color: white; padding: 0.7rem 1.6rem;
+    border: 2px solid rgba(255,255,255,0.3); border-radius: 2px; font-size: 0.69rem;
+    font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .btn-outline-white:hover { border-color: white; background: rgba(255,255,255,0.07); }
+
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 2rem;
+    padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.12);
+    opacity: 0; transform: translateY(16px);
+    animation: slideUp 0.7s ease 1.05s forwards;
+  }
+  .stat-number {
+    font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem;
+    color: var(--red); line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.62rem; color: rgba(255,255,255,0.4);
+    text-transform: uppercase; letter-spacing: 0.1em; margin-top: 3px;
+  }
+
+  @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+
+  /* ─── MARQUEE ─── */
+  .marquee-wrap {
+    position: relative; z-index: 6;
+    background: var(--red); padding: 0.6rem 0; overflow: hidden; flex-shrink: 0;
+  }
+  .marquee-track {
+    display: flex; gap: 3rem; white-space: nowrap;
+    animation: marquee 22s linear infinite; width: max-content;
+  }
+  .marquee-track span {
+    font-family: 'Bebas Neue', sans-serif; font-size: 0.85rem;
+    letter-spacing: 0.16em; color: white; text-transform: uppercase;
+    display: flex; align-items: center; gap: 1.5rem;
+  }
+  .marquee-track span::after { content: '✦'; opacity: 0.45; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ─── SECTION COMMON (LIGHT BG) ─── */
+  .section { padding: 4.5rem 0; }
+  .section > *,
+  .section-inner { 
+    max-width: 1280px; 
+    margin-left: auto; 
+    margin-right: auto;
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+  .section-tag {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-tag::before { content: ''; display: block; width: 28px; height: 2px; background: var(--red); }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 3vw, 3rem);
+    line-height: 0.95; letter-spacing: 0.02em; color: var(--ink);
+  }
+  .section-title .red { color: var(--red); }
+  .section-title .gold { color: var(--gold); }
+
+  /* ─── ANOS BANNER ─── */
+  .anos-banner {
+    background: var(--ink);
+    padding: 3.5rem 0; display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .anos-banner::before {
+    content: '1975'; position: absolute; right: 3rem; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Bebas Neue', sans-serif; font-size: 12rem;
+    color: rgba(200,40,30,0.06); letter-spacing: 0.1em;
+    pointer-events: none; user-select: none;
+  }
+  .anos-number {
+    font-family: 'Bebas Neue', sans-serif; font-size: 7rem;
+    line-height: 1; color: var(--gold-light);
+    text-shadow: 0 0 40px rgba(212,160,23,0.3); flex-shrink: 0;
+  }
+  .anos-text h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: white; line-height: 1.1; }
+  .anos-text p { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.7; margin-top: 0.6rem; max-width: 500px; }
+  .slogan-pill {
+    display: inline-block; margin-top: 1.5rem;
+    background: var(--red); color: white; padding: 0.5rem 1.2rem; border-radius: 2px;
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.12em;
+    box-shadow: 0 4px 20px var(--red-glow);
+  }
+
+  /* ─── PRODUTOS ─── */
+  .produtos { background: var(--bg); }
+  .produtos-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px;
+    margin-top: 3rem; border: 1.5px solid var(--border);
+    border-radius: 4px; overflow: hidden;
+  }
+  .produto-card {
+    background: white; border-right: 1.5px solid var(--border);
+    border-bottom: 1.5px solid var(--border);
+    padding: 1.8rem 1.6rem;
+    display: flex; flex-direction: column; gap: 0.8rem;
+    transition: background 0.25s, transform 0.25s;
+    cursor: pointer; position: relative; overflow: hidden;
+  }
+  .produto-card:hover { background: var(--red); }
+  .produto-card:hover .prod-name,
+  .produto-card:hover .prod-desc { color: white; }
+  .produto-card:hover .prod-num { color: rgba(255,255,255,0.1); }
+  .prod-num {
+    font-family: 'Bebas Neue', sans-serif; font-size: 3rem;
+    color: rgba(0,0,0,0.05); line-height: 1;
+    position: absolute; top: 1rem; right: 1.5rem; transition: color 0.25s;
+  }
+  .prod-icon { font-size: 1.5rem; margin-bottom: 0.2rem; }
+  .prod-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.04em; color: var(--ink); transition: color 0.25s; }
+  .prod-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.65; transition: color 0.25s; }
+
+  /* ─── DIFERENCIAIS ─── */
+  .diferenciais { background: var(--bg2); }
+  .diferenciais .section-title { color: var(--ink); }
+  .diff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .diff-card {
+    background: white; border: 1px solid var(--border);
+    border-radius: 4px; padding: 1.5rem 1.2rem;
+    transition: border-color 0.25s, box-shadow 0.25s;
+  }
+  .diff-card:hover { border-color: var(--red); box-shadow: 0 4px 24px rgba(200,40,30,0.1); }
+  .diff-icon { font-size: 1.6rem; margin-bottom: 0.9rem; }
+  .diff-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; letter-spacing: 0.04em; color: var(--ink); margin-bottom: 0.4rem; }
+  .diff-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.65; }
+
+  /* ─── TECNOLOGIA ─── */
+  .tecnologia { background: var(--ink); }
+  .tecnologia .section-tag { color: #ff7060; }
+  .tecnologia .section-tag::before { background: var(--red); }
+  .tecnologia .section-title { color: white; }
+  .tecnologia .section-title .red { color: var(--red); }
+  .tech-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .tech-list { display: flex; flex-direction: column; gap: 0; }
+  .tech-item {
+    display: flex; align-items: flex-start; gap: 1.5rem;
+    padding: 1.3rem 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+    cursor: pointer; transition: gap 0.2s;
+  }
+  .tech-item:hover { gap: 2rem; }
+  .tech-num { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--red); line-height: 1; flex-shrink: 0; }
+  .tech-text h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.15rem; letter-spacing: 0.04em; color: white; margin-bottom: 0.25rem; }
+  .tech-text p { font-size: 0.75rem; color: rgba(255,255,255,0.45); line-height: 1.6; }
+  .tech-visual {
+    border-radius: 4px; height: 340px; position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(200,40,30,0.07); border: 1px solid rgba(200,40,30,0.15);
+  }
+  .tech-bg-text {
+    font-family: 'Bebas Neue', sans-serif; font-size: 4.5rem;
+    color: rgba(255,255,255,0.04); letter-spacing: 0.1em; text-align: center;
+    line-height: 1.2; user-select: none;
+  }
+  .tech-badge {
+    position: absolute; bottom: 2rem; left: 2rem;
+    background: var(--red); color: white; padding: 0.6rem 1.2rem;
+    border-radius: 2px; font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.9rem; letter-spacing: 0.08em;
+    box-shadow: 0 4px 16px var(--red-glow);
+  }
+
+  /* ─── TRABALHE CONOSCO ─── */
+  .trabalhe { background: var(--bg3); }
+  .trabalhe .section-tag { color: var(--gold); }
+  .trabalhe .section-tag::before { background: var(--gold); }
+  .trabalhe-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: start; }
+  .trabalhe-sub { font-size: 0.82rem; color: var(--muted); line-height: 1.75; margin-top: 0.8rem; margin-bottom: 1.5rem; }
+  .trabalhe-perks { display: flex; flex-direction: column; gap: 1rem; }
+  .perk { display: flex; align-items: center; gap: 1rem; font-size: 0.85rem; color: var(--ink2); }
+  .perk-icon {
+    width: 36px; height: 36px; background: rgba(200,40,30,0.08);
+    border: 1px solid rgba(200,40,30,0.2); border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+  }
+  .trabalhe-form {
+    background: white; border: 1px solid var(--border);
+    border-radius: 6px; padding: 2rem;
+    display: flex; flex-direction: column; gap: 0.85rem;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.07);
+  }
+  .trabalhe-form h3 {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem;
+    letter-spacing: 0.04em; color: var(--ink); margin-bottom: 0.4rem;
+  }
+
+  /* ─── FORM COMMON ─── */
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .form-group input, .form-group textarea, .form-group select {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 2px; padding: 0.6rem 0.85rem; color: var(--ink);
+    font-family: 'Montserrat', sans-serif; font-size: 0.78rem;
+    outline: none; transition: border-color 0.2s;
+    -webkit-appearance: none;
+  }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(0,0,0,0.25); }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--red); }
+  .form-group select option { color: var(--ink); background: white; }
+  .form-group textarea { resize: vertical; min-height: 110px; }
+  .upload-area {
+    border: 2px dashed rgba(0,0,0,0.18); border-radius: 4px;
+    padding: 1.5rem; text-align: center; cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    font-size: 0.82rem; color: var(--muted);
+  }
+  .upload-area:hover { border-color: var(--red); background: rgba(200,40,30,0.03); }
+  .upload-area input { display: none; }
+  .upload-area .upload-icon { font-size: 1.8rem; margin-bottom: 0.5rem; display: block; }
+  .btn-form {
+    background: var(--red); color: white; border: none; padding: 0.75rem 1.6rem;
+    border-radius: 2px; font-family: 'Montserrat', sans-serif; font-size: 0.7rem;
+    font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer; transition: opacity 0.2s, transform 0.1s; align-self: flex-start;
+    box-shadow: 0 4px 16px var(--red-glow);
+  }
+  .btn-form:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  /* ─── CONTATO ─── */
+  .contato { background: var(--bg2); }
+  .contato-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .contato-sub { font-size: 0.95rem; color: var(--muted); line-height: 1.7; margin-top: 1rem; }
+  .contato-info { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; }
+  .info-item { display: flex; gap: 1rem; align-items: flex-start; }
+  .info-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+  .info-text h4 { font-weight: 700; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+  .info-text p { font-size: 0.9rem; margin-top: 3px; line-height: 1.55; color: var(--ink2); }
+  .contato-form {
+    background: white; border: 1px solid var(--border);
+    border-radius: 6px; padding: 2rem;
+    display: flex; flex-direction: column; gap: 0.85rem;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.07);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--ink); color: rgba(255,255,255,0.4);
+    padding: 2rem 0; display: flex;
+    justify-content: center; align-items: center;
+    flex-wrap: wrap; gap: 1.5rem;
+    border-top: 3px solid var(--red);
+  }
+  .footer-logo img { height: 36px; }
+  footer p { font-size: 0.75rem; }
+  .footer-social { display: flex; gap: 0.75rem; }
+  .footer-social a {
+    width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 2px; display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.72rem; font-weight: 700;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .footer-social a:hover { border-color: var(--red); color: white; }
+
+  /* ─── WHATSAPP ─── */
+  .wpp-btn {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 300;
+    background: #25d366; color: white; width: 48px; height: 48px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 22px rgba(37,211,102,0.4);
+    text-decoration: none; transition: transform 0.2s;
+    animation: wpp-pulse 2.5s infinite;
+  }
+  .wpp-btn:hover { transform: scale(1.1); }
+  @keyframes wpp-pulse {
+    0%,100% { box-shadow: 0 4px 22px rgba(37,211,102,0.4); }
+    50% { box-shadow: 0 4px 34px rgba(37,211,102,0.65); }
+  }
+
+  /* ─── REVEAL ─── */
+  [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  [data-reveal].revealed { opacity: 1; transform: translateY(0); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 0.7rem 1.5rem; }
+    .nav-links { display: none; }
+    .nav-logo img { height: 44px; }
+    .hero-inner { grid-template-columns: 1fr; max-width: 100%; }
+    .carousel-wrap { min-height: 260px; }
+    .hero-content { padding: 2.5rem 1.5rem 2rem; }
+    .section { padding: 3rem 0; }
+    .section > *, .section-inner { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .produtos-grid { grid-template-columns: 1fr 1fr; }
+    .diff-grid { grid-template-columns: 1fr 1fr; }
+    .tech-layout { grid-template-columns: 1fr; }
+    .contato-layout { grid-template-columns: 1fr; }
+    .trabalhe-layout { grid-template-columns: 1fr; }
+    .anos-banner { flex-direction: column; }
+    .anos-banner > div { padding: 2rem 1.5rem; flex-direction: column; gap: 1.5rem; }
+    .anos-number { font-size: 5.5rem; }
+    footer { padding: 0; }
+    footer > div { flex-direction: column; text-align: center; padding: 1.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .carousel-btn { display: none; }
+  }
+
+  /* ─── CARROSSEL VERTICAL TECNOLOGIA ─── */
+  .tech-visual--carousel {
+    padding: 0;
+    background: none;
+    border: none;
+  }
+  .tech-vcarousel {
+    width: 100%; height: 100%;
+    overflow: hidden;
+    border-radius: 4px;
+    border: 1px solid rgba(200,40,30,0.15);
+    position: relative;
+  }
+  .tech-vtrack {
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.9s cubic-bezier(0.77,0,0.175,1);
+    will-change: transform;
+  }
+  .tech-vslide {
+    width: 100%;
+    height: 340px;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .tech-vslide img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+  .tech-vslide::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.45) 100%);
+  }
+  .tech-vbadge {
+    position: absolute; bottom: 1.2rem; left: 1.2rem; z-index: 2;
+    background: var(--red); color: white;
+    font-family: 'Bebas Neue', sans-serif; font-size: 0.85rem;
+    letter-spacing: 0.12em; padding: 0.3rem 0.85rem; border-radius: 2px;
+    box-shadow: 0 2px 12px var(--red-glow);
+  }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-inner">
+  <a href="#" class="nav-logo">
+    <img src="logo50.jpg" alt="Gráfica Santa Edwiges – 50 Anos">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#produtos">Produtos</a></li>
+    <li><a href="#diferenciais">Diferenciais</a></li>
+    <li><a href="#tecnologia">Tecnologia</a></li>
+    <li><a href="#trabalhe">Trabalhe Conosco</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <a href="https://api.whatsapp.com/send?phone=5515981759000" class="nav-cta" target="_blank">Solicitar Orçamento</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-outer">
+  <div class="hero-inner">
+
+    <!-- TEXTO — esquerda -->
+    <div class="hero-content">
+      <p class="hero-eyebrow">Desde 1975 · Tietê, SP</p>
+      <h1 class="hero-title">
+        IMPRESSÃO<br>
+        QUE <span class="red">MARCA</span><br>
+        DEIXA.
+      </h1>
+      <p class="hero-slogan">
+        <strong>Há 50 anos imprimindo Qualidade.</strong><br>
+        Gráfica industrial com offset, digital e serigrafia. Do conceito ao acabamento, seu material impresso com excelência.
+      </p>
+      <div class="hero-btns">
+        <a href="#contato" class="btn-primary">Solicitar Orçamento</a>
+        <a href="#produtos" class="btn-outline-white">Ver Produtos</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-number">51</div>
+          <div class="stat-label">Anos de mercado</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">5k+</div>
+          <div class="stat-label">Clientes atendidos</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Unidades em SP</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARROSSEL — direita -->
+    <div class="carousel-wrap">
+      <div class="carousel" id="carousel">
+        <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-slide">
+            <img src="Img_aerea.jpg" alt="Estrutura Gráfica Santa Edwiges – Vista Aérea">
+          </div>
+          <div class="carousel-slide">
+            <img src="img_digital2.jpg" alt="Impressão Offset – Gráfica Santa Edwiges">
+          </div>
+          <div class="carousel-slide">
+            <img src="imag_digital1.jpg" alt="Impressão Digital – Gráfica Santa Edwiges">
+          </div>
+        </div>
+        <div class="carousel-label" id="carouselLabel">Vista Aérea</div>
+        <button class="carousel-btn prev" id="prevBtn" aria-label="Anterior">&#8592;</button>
+        <button class="carousel-btn next" id="nextBtn" aria-label="Próximo">&#8594;</button>
+        <div class="carousel-dots">
+          <div class="dot active" data-index="0"></div>
+          <div class="dot" data-index="1"></div>
+          <div class="dot" data-index="2"></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.hero-inner -->
+  </div><!-- /.hero-outer -->
+
+  <!-- MARQUEE — visível já na abertura -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span>Catálogos</span><span>Folders</span><span>Embalagens</span>
+      <span>Apostilas</span><span>Offset</span><span>Digital</span>
+      <span>Serigrafia</span><span>Lâminas</span><span>Wobblers</span>
+      <span>Pastas</span><span>Hot Stamping</span><span>Verniz UV</span>
+      <span>Catálogos</span><span>Folders</span><span>Embalagens</span>
+      <span>Apostilas</span><span>Offset</span><span>Digital</span>
+      <span>Serigrafia</span><span>Lâminas</span><span>Wobblers</span>
+      <span>Pastas</span><span>Hot Stamping</span><span>Verniz UV</span>
+    </div>
+  </div>
+</section>
+
+<!-- 51 ANOS BANNER -->
+<div class="anos-banner" data-reveal>
+  <div style="max-width:1280px;margin:0 auto;width:100%;padding:0 4rem;display:flex;align-items:center;gap:4rem;">
+  <div class="anos-number">51</div>
+  <div class="anos-text">
+    <h2>ANOS IMPRIMINDO<br>QUALIDADE</h2>
+    <p>Fundada em 1975 em Tietê/SP, a Gráfica Santa Edwiges construiu 51 anos de história produzindo materiais gráficos com excelência, responsabilidade e tecnologia de ponta para empresas de todo o Brasil.</p>
+    <span class="slogan-pill">Há 50 anos imprimindo Qualidade — 1975 · 2025</span>
+  </div>
+  </div>
+</div>
+
+<!-- PRODUTOS -->
+<section class="section produtos" id="produtos">
+  <div data-reveal>
+    <p class="section-tag">O que fazemos</p>
+    <h2 class="section-title">NOSSOS <span class="red">PRODUTOS</span></h2>
+  </div>
+  <div class="produtos-grid">
+    <div class="produto-card" data-reveal>
+      <span class="prod-num">01</span>
+      <div class="prod-icon">📖</div>
+      <div class="prod-name">Catálogos</div>
+      <p class="prod-desc">Apresentações institucionais e de produtos com qualidade premium de impressão e acabamento.</p>
+    </div>
+    <div class="produto-card" data-reveal>
+      <span class="prod-num">02</span>
+      <div class="prod-icon">📄</div>
+      <div class="prod-name">Folders</div>
+      <p class="prod-desc">Folders dobrados em diversas configurações para campanhas de marketing e vendas.</p>
+    </div>
+    <div class="produto-card" data-reveal>
+      <span class="prod-num">03</span>
+      <div class="prod-icon">📰</div>
+      <div class="prod-name">Folhetos</div>
+      <p class="prod-desc">Materiais de divulgação rápida com impressão de alta qualidade e curto prazo de entrega.</p>
+    </div>
+    <div class="produto-card" data-reveal>
+      <span class="prod-num">04</span>
+      <div class="prod-icon">📦</div>
+      <div class="prod-name">Embalagens</div>
+      <p class="prod-desc">Embalagens personalizadas com acabamentos diferenciados para seu produto se destacar.</p>
+    </div>
+    <div class="produto-card" data-reveal>
+      <span class="prod-num">05</span>
+      <div class="prod-icon">📚</div>
+      <div class="prod-name">Apostilas</div>
+      <p class="prod-desc">Impressão de apostilas, manuais e cadernos com grampeamento, espiral e encadernação.</p>
+    </div>
+    <div class="produto-card" data-reveal>
+      <span class="prod-num">06</span>
+      <div class="prod-icon">🏷️</div>
+      <div class="prod-name">Wobblers & Lâminas</div>
+      <p class="prod-desc">Material de PDV e sinalização para ponto de venda com acabamentos especiais.</p>
+    </div>
+  </div>
+  <div style="margin-top:2.5rem;display:flex;justify-content:center;" data-reveal>
+    <a href="https://www.graficasantaedwiges.com.br/portfolio" target="_blank" class="btn-primary">Ver Portfólio Completo</a>
+  </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section class="section diferenciais" id="diferenciais">
+  <div data-reveal>
+    <p class="section-tag">Por que nos escolher</p>
+    <h2 class="section-title">NOSSOS <span class="red">DIFERENCIAIS</span></h2>
+  </div>
+  <div class="diff-grid">
+    <div class="diff-card" data-reveal>
+      <div class="diff-icon">🏆</div>
+      <div class="diff-title">Certificações FSC</div>
+      <p class="diff-desc">Materiais produzidos com responsabilidade ambiental e certificações internacionais de qualidade.</p>
+    </div>
+    <div class="diff-card" data-reveal>
+      <div class="diff-icon">🚚</div>
+      <div class="diff-title">Logística própria</div>
+      <p class="diff-desc">Frota própria para entregas em Tietê, Sorocaba, Campinas, São Paulo e toda a região.</p>
+    </div>
+    <div class="diff-card" data-reveal>
+      <div class="diff-icon">⚡</div>
+      <div class="diff-title">Prazos ágeis</div>
+      <p class="diff-desc">Produção industrial com capacidade para atender grandes volumes com agilidade e precisão.</p>
+    </div>
+    <div class="diff-card" data-reveal>
+      <div class="diff-icon">🎯</div>
+      <div class="diff-title">Suporte técnico</div>
+      <p class="diff-desc">Equipe especializada para orientar preparo de arquivos e especificações técnicas do seu material.</p>
+    </div>
+    <div class="diff-card" data-reveal>
+      <div class="diff-icon">🌱</div>
+      <div class="diff-title">Sustentabilidade</div>
+      <p class="diff-desc">Comprometidos com práticas sustentáveis, uso de insumos certificados e redução de resíduos.</p>
+    </div>
+    <div class="diff-card" data-reveal>
+      <div class="diff-icon">📐</div>
+      <div class="diff-title">Controle de Qualidade</div>
+      <p class="diff-desc">Processo rigoroso de inspeção em cada etapa da produção para garantir o melhor resultado.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TECNOLOGIA -->
+<section class="section tecnologia" id="tecnologia">
+  <div class="tech-layout">
+    <div>
+      <div data-reveal>
+        <p class="section-tag">Como produzimos</p>
+        <h2 class="section-title">TECNOLOGIA <span class="red">DE PONTA</span></h2>
+      </div>
+      <div class="tech-list">
+        <div class="tech-item" data-reveal>
+          <div class="tech-num">01</div>
+          <div class="tech-text">
+            <h3>Impressão Offset</h3>
+            <p>6 máquinas offset para atender todos os tipos de materiais com 5.500 m² de estrutura e alta qualidade.</p>
+          </div>
+        </div>
+        <div class="tech-item" data-reveal>
+          <div class="tech-num">02</div>
+          <div class="tech-text">
+            <h3>Impressão Digital</h3>
+            <p>Ideal para pequenas tiragens, personalização variável e produção rápida sem custo de fotolito.</p>
+          </div>
+        </div>
+        <div class="tech-item" data-reveal>
+          <div class="tech-num">03</div>
+          <div class="tech-text">
+            <h3>Impressão Serigrafia</h3>
+            <p>Perfeita para embalagens e superfícies especiais, com tintas de alta durabilidade e vivacidade.</p>
+          </div>
+        </div>
+        <div class="tech-item" data-reveal>
+          <div class="tech-num">04</div>
+          <div class="tech-text">
+            <h3>Acabamentos Exclusivos</h3>
+            <p>Verniz UV, hot stamping, relevo, laminação fosca e brilho — valorizamos cada detalhe do seu material.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tech-visual tech-visual--carousel" data-reveal>
+      <div class="tech-vcarousel" id="techCarousel">
+        <div class="tech-vtrack" id="techTrack">
+          <div class="tech-vslide">
+            <img src="digital.jpg" alt="Impressão Digital">
+            <div class="tech-vbadge">Impressão Digital</div>
+          </div>
+          <div class="tech-vslide">
+            <img src="offset.jpg" alt="Impressão Offset">
+            <div class="tech-vbadge">Impressão Offset</div>
+          </div>
+          <div class="tech-vslide">
+            <img src="digital.jpg" alt="Impressão Digital">
+            <div class="tech-vbadge">Impressão Digital</div>
+          </div>
+          <div class="tech-vslide">
+            <img src="offset.jpg" alt="Impressão Offset">
+            <div class="tech-vbadge">Impressão Offset</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRABALHE CONOSCO -->
+<section class="section trabalhe" id="trabalhe">
+  <div class="trabalhe-layout">
+    <div data-reveal>
+      <p class="section-tag">Faça parte do time</p>
+      <h2 class="section-title">TRABALHE <span class="red">CONOSCO</span></h2>
+      <p class="trabalhe-sub">
+        Com 51 anos de mercado, somos uma das maiores gráficas do interior de São Paulo. Buscamos profissionais comprometidos e que queiram crescer junto com a gente.
+      </p>
+      <div class="trabalhe-perks">
+        <div class="perk"><div class="perk-icon">💼</div> Ambiente profissional e estruturado</div>
+        <div class="perk"><div class="perk-icon">📈</div> Plano de crescimento e desenvolvimento</div>
+        <div class="perk"><div class="perk-icon">🤝</div> Cultura colaborativa e respeito ao colaborador</div>
+        <div class="perk"><div class="perk-icon">🏭</div> Parque gráfico moderno e tecnológico</div>
+      </div>
+    </div>
+    <div data-reveal>
+      <div class="trabalhe-form">
+        <h3>Envie seu Currículo</h3>
+        <p style="font-size:0.8rem;color:var(--muted);margin-bottom:0.5rem">Preencha o formulário e nossa equipe de RH entrará em contato.</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nome completo</label>
+            <input type="text" placeholder="Seu nome">
+          </div>
+          <div class="form-group">
+            <label>Telefone / WhatsApp</label>
+            <input type="tel" placeholder="(XX) XXXXX-XXXX">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>E-mail</label>
+          <input type="email" placeholder="seu@email.com.br">
+        </div>
+        <div class="form-group">
+          <label>Área de interesse</label>
+          <select>
+            <option value="">Selecione a área...</option>
+            <option>Produção Gráfica / Operacional</option>
+            <option>Pré-impressão / Arte Final</option>
+            <option>Comercial / Vendas</option>
+            <option>Logística e Expedição</option>
+            <option>Administrativo / Financeiro</option>
+            <option>TI / Sistemas</option>
+            <option>Outro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Sobre você</label>
+          <textarea placeholder="Conte um pouco sobre sua experiência e por que quer fazer parte do nosso time..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Currículo (PDF ou DOC)</label>
+          <label class="upload-area" id="upload-label">
+            <span class="upload-icon">📎</span>
+            <span id="upload-text">Clique para selecionar ou arraste o arquivo aqui</span>
+            <input type="file" id="cv-upload" accept=".pdf,.doc,.docx">
+          </label>
+        </div>
+        <button class="btn-form" id="btn-trabalhe">Enviar Candidatura →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="section contato" id="contato">
+  <div class="contato-layout">
+    <div data-reveal>
+      <p class="section-tag">Fale com a gente</p>
+      <h2 class="section-title">SOLICITE SEU<br><span class="red">ORÇAMENTO</span></h2>
+      <p class="contato-sub">Conte com nossa equipe comercial para desenvolver o melhor material para a sua empresa. Respondemos em até 24h.</p>
+      <div class="contato-info">
+        <div class="info-item">
+          <span class="info-icon">📍</span>
+          <div class="info-text">
+            <h4>Endereço</h4>
+            <p>Rod. Cornélio Pires SP 127 - Km 74,5<br>Bairro Ponte Alta — Tietê/SP</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">📞</span>
+          <div class="info-text">
+            <h4>Telefones</h4>
+            <p>Tietê: (15) 3282-3555<br>Sorocaba: (15) 4062-9000<br>Campinas: (19) 4062-8299</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">✉️</span>
+          <div class="info-text">
+            <h4>E-mail</h4>
+            <p>comercial@gruposantaedwiges.com.br</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div data-reveal>
+      <div class="contato-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nome</label>
+            <input type="text" placeholder="Seu nome completo">
+          </div>
+          <div class="form-group">
+            <label>Empresa</label>
+            <input type="text" placeholder="Nome da empresa">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Telefone</label>
+            <input type="tel" placeholder="(XX) XXXXX-XXXX">
+          </div>
+          <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" placeholder="seu@email.com.br">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Produto de interesse</label>
+          <select>
+            <option value="">Selecione...</option>
+            <option>Catálogos</option>
+            <option>Folders / Folhetos</option>
+            <option>Embalagens</option>
+            <option>Apostilas</option>
+            <option>Wobblers / Lâminas</option>
+            <option>Outro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Mensagem</label>
+          <textarea placeholder="Descreva seu projeto: produto, quantidade, prazo..."></textarea>
+        </div>
+        <button class="btn-form" id="btn-contato">Enviar Mensagem →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div style="max-width:1280px;width:100%;padding:0 4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;">
+  <a href="#" class="footer-logo">
+    <img src="logo50.jpg" alt="Gráfica Santa Edwiges">
+  </a>
+  <p>© 2025 Grupo Santa Edwiges. Todos os direitos reservados. · Fundada em 1975</p>
+  <div class="footer-social">
+    <a href="http://www.facebook.com/grupostaedwiges" target="_blank" title="Facebook">fb</a>
+    <a href="https://instagram.com/gruposantaedwiges_" target="_blank" title="Instagram">ig</a>
+    <a href="https://www.youtube.com/user/grupostaedwiges" target="_blank" title="YouTube">yt</a>
+  </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP -->
+<a href="https://api.whatsapp.com/send?phone=5515981759000" class="wpp-btn" target="_blank" title="Fale pelo WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+  // ─── CARROSSEL ───
+  const track = document.getElementById('carouselTrack');
+  const dots = document.querySelectorAll('.dot');
+  const label = document.getElementById('carouselLabel');
+  const labels = ['Vista Aérea', 'Impressão Offset', 'Impressão Digital'];
+  let current = 0;
+  const total = 3;
+  let autoTimer;
+
+  function goTo(index) {
+    current = (index + total) % total;
+    const slideWidth = track.parentElement.offsetWidth;
+    track.style.transform = `translateX(-${current * slideWidth}px)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    if (label) label.textContent = labels[current];
+  }
+
+  // Recalcula posição se janela for redimensionada
+  window.addEventListener('resize', () => goTo(current));
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  function startAuto() {
+    autoTimer = setInterval(next, 5000);
+  }
+  function stopAuto() { clearInterval(autoTimer); }
+
+  document.getElementById('nextBtn').addEventListener('click', () => { stopAuto(); next(); startAuto(); });
+  document.getElementById('prevBtn').addEventListener('click', () => { stopAuto(); prev(); startAuto(); });
+  dots.forEach(d => d.addEventListener('click', () => { stopAuto(); goTo(+d.dataset.index); startAuto(); }));
+
+  // Touch swipe
+  let touchStartX = 0;
+  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) { stopAuto(); diff > 0 ? next() : prev(); startAuto(); }
+  });
+
+  startAuto();
+
+  // ─── CARROSSEL VERTICAL TECNOLOGIA ───
+  (function() {
+    const vtrack = document.getElementById('techTrack');
+    if (!vtrack) return;
+    const slides = vtrack.querySelectorAll('.tech-vslide');
+    const slideH = 340; // altura fixa de cada slide em px
+    let vcurrent = 0;
+    const realTotal = 2; // slides reais (as duplicatas servem para o loop)
+
+    function vGoTo(index) {
+      vcurrent = index;
+      vtrack.style.transform = 'translateY(-' + (index * slideH) + 'px)';
+    }
+
+    function vNext() {
+      const next = vcurrent + 1;
+      // Chegou nas duplicatas — avança normalmente, depois reseta sem animação
+      if (next >= realTotal) {
+        vGoTo(next);
+        // Após a transição, reseta silenciosamente para o slide real correspondente
+        setTimeout(() => {
+          vtrack.style.transition = 'none';
+          vcurrent = next - realTotal;
+          vtrack.style.transform = 'translateY(-' + (vcurrent * slideH) + 'px)';
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              vtrack.style.transition = 'transform 0.9s cubic-bezier(0.77,0,0.175,1)';
+            });
+          });
+        }, 950);
+      } else {
+        vGoTo(next);
+      }
+    }
+
+    setInterval(vNext, 3500);
+  })();
+
+
+  // ─── NAV SCROLL ───
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('main-nav');
+    if (window.scrollY > 60) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  // ─── REVEAL ───
+  const reveals = document.querySelectorAll('[data-reveal]');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('revealed'), i * 70);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => io.observe(el));
+
+  // ─── FORMS ───
+  document.getElementById('cv-upload').addEventListener('change', function() {
+    document.getElementById('upload-text').textContent = this.files[0] ? this.files[0].name : 'Clique para selecionar ou arraste o arquivo aqui';
+  });
+  document.getElementById('btn-trabalhe').addEventListener('click', () => {
+    alert('Candidatura enviada com sucesso! Nossa equipe de RH analisará seu perfil em breve. ✓');
+  });
+  document.getElementById('btn-contato').addEventListener('click', () => {
+    alert('Mensagem enviada! Entraremos em contato em breve. ✓');
+  });
+</script>
+</body>
+</html>
