@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trabalhe Conosco – Gráfica Santa Edwiges</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:      #F5F1EB;
+  --bg2:     #EDE8DF;
+  --bg3:     #E6E0D5;
+  --ink:     #111010;
+  --ink2:    #2A2825;
+  --ink3:    #4A4742;
+  --red:     #C8281E;
+  --red-dk:  #8F1912;
+  --red-glow:rgba(200,40,30,.18);
+  --gold:    #B8860B;
+  --gold-lt: #D4A017;
+  --muted:   #7A7060;
+  --white:   #FFFFFF;
+  --border:  rgba(0,0,0,.09);
+  --nav-h:   72px;
+  --radius:  6px;
+  --ease:    cubic-bezier(.77,0,.175,1);
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); overflow-x: hidden; font-size: 16px; line-height: 1.6; }
+
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  height: var(--nav-h);
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 2.5rem;
+  background: rgba(245,241,235,.96);
+  backdrop-filter: blur(20px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow .3s, background .3s;
+}
+nav.scrolled { box-shadow: 0 2px 32px rgba(0,0,0,.09); }
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; max-width: 1280px;
+}
+.nav-logo img { height: 48px; display: block; transition: height .3s; }
+nav.scrolled .nav-logo img { height: 38px; }
+
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  text-decoration: none; color: var(--ink2);
+  font-size: .72rem; font-weight: 600; letter-spacing: .12em;
+  text-transform: uppercase; transition: color .2s;
+  position: relative; padding-bottom: 4px;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 1.5px; background: var(--red); transform: scaleX(0); transform-origin: left;
+  transition: transform .25s var(--ease);
+}
+.nav-links a:hover, .nav-links a.active { color: var(--red); }
+.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+
+.nav-right { display: flex; align-items: center; gap: 1.2rem; }
+.nav-cta {
+  background: var(--red); color: white;
+  padding: .55rem 1.4rem; border-radius: 3px;
+  font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  text-decoration: none; border: 2px solid var(--red);
+  transition: background .2s, transform .15s, box-shadow .2s;
+  box-shadow: 0 2px 14px var(--red-glow);
+  white-space: nowrap;
+}
+.nav-cta:hover { background: transparent; color: var(--red); transform: translateY(-1px); }
+
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--ink); transition: .3s; }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none; position: fixed; inset: 0; top: var(--nav-h);
+  background: rgba(245,241,235,.98); backdrop-filter: blur(20px);
+  z-index: 400; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2.5rem; padding: 3rem;
+  transform: translateY(-100%); transition: transform .4s var(--ease);
+}
+.mobile-menu.open { transform: translateY(0); }
+.mobile-menu a {
+  font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: .06em;
+  color: var(--ink); text-decoration: none; transition: color .2s;
+}
+.mobile-menu a:hover { color: var(--red); }
+.mobile-menu .nav-cta { font-size: .85rem; padding: .7rem 2rem; }
+
+/* ═══════════════════════════════════════
+   PAGE HERO
+═══════════════════════════════════════ */
+.page-hero {
+  padding-top: var(--nav-h);
+  background: var(--ink);
+  position: relative; overflow: hidden;
+}
+.page-hero-inner {
+  max-width: 1280px; margin: 0 auto;
+  padding: 4rem 4rem 3.5rem;
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 3rem;
+}
+.page-hero-inner::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  background: linear-gradient(to bottom, transparent, var(--red), transparent);
+  opacity: .4;
+}
+.page-hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: .68rem; font-weight: 600; letter-spacing: .22em;
+  text-transform: uppercase; color: #FF7060; margin-bottom: 1.4rem;
+}
+.page-hero-eyebrow::before { content: ''; width: 28px; height: 1.5px; background: var(--red); }
+.page-hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.8rem, 5vw, 5.2rem);
+  line-height: .92; letter-spacing: .02em; color: white;
+}
+.page-hero-title .red { color: var(--red); }
+.page-hero-sub {
+  font-size: .9rem; color: rgba(255,255,255,.5); line-height: 1.75;
+  margin-top: .9rem; max-width: 440px;
+}
+.page-hero-back {
+  flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px;
+  font-size: .68rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(255,255,255,.4); text-decoration: none;
+  border: 1px solid rgba(255,255,255,.12); padding: .5rem 1.1rem; border-radius: 3px;
+  transition: color .2s, border-color .2s;
+  align-self: flex-start; margin-top: auto;
+}
+.page-hero-back:hover { color: white; border-color: rgba(255,255,255,.35); }
+
+/* Perks strip */
+.perks-strip {
+  background: var(--red); padding: .6rem 0; overflow: hidden;
+}
+.perks-track {
+  display: flex; gap: 3rem; white-space: nowrap;
+  animation: marquee 22s linear infinite; width: max-content;
+}
+.perks-track span {
+  font-family: 'Bebas Neue', sans-serif; font-size: .78rem;
+  letter-spacing: .18em; color: white; text-transform: uppercase;
+  display: flex; align-items: center; gap: 1.2rem;
+}
+.perks-track span::after { content: '✦'; opacity: .4; font-size: .55rem; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+/* ═══════════════════════════════════════
+   BENEFITS ROW
+═══════════════════════════════════════ */
+.benefits-section {
+  background: var(--bg2); padding: 3rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.benefits-inner {
+  max-width: 1280px; margin: 0 auto;
+  padding: 0 4rem;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+.benefit-card {
+  display: flex; flex-direction: column; gap: .6rem;
+}
+.benefit-icon {
+  width: 42px; height: 42px; background: rgba(200,40,30,.08);
+  border: 1px solid rgba(200,40,30,.18); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; flex-shrink: 0;
+}
+.benefit-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem;
+  letter-spacing: .04em; color: var(--ink);
+}
+.benefit-desc { font-size: .78rem; color: var(--muted); line-height: 1.6; }
+
+/* ═══════════════════════════════════════
+   FORM SECTION
+═══════════════════════════════════════ */
+.form-section {
+  padding: 4rem 0 5rem;
+  background: var(--bg);
+}
+.form-section-inner {
+  max-width: 860px; margin: 0 auto;
+  padding: 0 4rem;
+}
+
+/* Progress bar header */
+.form-progress-header {
+  background: var(--ink); border-radius: var(--radius) var(--radius) 0 0;
+  padding: 1.4rem 2rem;
+}
+.form-progress-top {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: .6rem;
+}
+.form-progress-label {
+  font-size: .65rem; font-weight: 600; letter-spacing: .14em;
+  text-transform: uppercase; color: rgba(255,255,255,.45);
+}
+.form-progress-pct {
+  font-family: 'Bebas Neue', sans-serif; font-size: 1rem;
+  color: var(--gold-lt); letter-spacing: .06em;
+}
+.progress-track {
+  width: 100%; height: 3px; background: rgba(255,255,255,.1); border-radius: 2px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: var(--red); border-radius: 2px;
+  transition: width .4s var(--ease); width: 0%;
+}
+.form-progress-note {
+  font-size: .62rem; color: rgba(255,255,255,.28);
+  letter-spacing: .06em; margin-top: .4rem;
+}
+
+/* Form card */
+.form-card {
+  background: white;
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  padding: 2.8rem 2.4rem;
+  box-shadow: 0 12px 60px rgba(0,0,0,.08);
+}
+
+/* Section headings inside form */
+.fsec {
+  margin-bottom: 1.8rem;
+}
+.fsec + .fsec, .fgrid + .fsec { margin-top: 2.4rem; padding-top: 2.4rem; border-top: 1px solid var(--border); }
+.fsec-title {
+  display: flex; align-items: center; gap: .8rem;
+  font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem;
+  letter-spacing: .04em; color: var(--ink); margin-bottom: 1.4rem;
+}
+.fsec-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(200,40,30,.09); border: 1px solid rgba(200,40,30,.2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Sans', sans-serif; font-size: .7rem;
+  font-weight: 700; color: var(--red); flex-shrink: 0;
+}
+
+/* Grid helpers */
+.fgrid { display: grid; gap: 1.2rem; }
+.fgrid-2 { grid-template-columns: 1fr 1fr; }
+.fgrid-3 { grid-template-columns: 1fr 1fr 1fr; }
+.fspan2 { grid-column: span 2; }
+
+/* Field */
+.fgroup { display: flex; flex-direction: column; gap: .32rem; }
+.fgroup label {
+  font-size: .62rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted);
+}
+.fgroup label .req { color: var(--red); margin-left: 2px; }
+.fgroup input,
+.fgroup textarea,
+.fgroup select {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 4px; padding: .7rem 1rem; color: var(--ink);
+  font-family: 'DM Sans', sans-serif; font-size: .84rem;
+  outline: none; transition: border-color .2s, box-shadow .2s;
+  -webkit-appearance: none; width: 100%;
+}
+.fgroup input::placeholder, .fgroup textarea::placeholder { color: rgba(0,0,0,.22); }
+.fgroup input:focus, .fgroup textarea:focus, .fgroup select:focus {
+  border-color: var(--red); box-shadow: 0 0 0 3px rgba(200,40,30,.08);
+}
+.fgroup select option { color: var(--ink); background: white; }
+.fgroup textarea { resize: vertical; min-height: 90px; }
+.fgroup .field-hint { font-size: .68rem; color: var(--muted); margin-top: .2rem; }
+
+/* prefix field (R$) */
+.prefix-wrap { position: relative; }
+.prefix-wrap .prefix {
+  position: absolute; left: .9rem; top: 50%; transform: translateY(-50%);
+  font-size: .82rem; color: var(--muted); pointer-events: none;
+}
+.prefix-wrap input { padding-left: 2.2rem; }
+
+/* Checkbox group */
+.checkbox-group { display: grid; grid-template-columns: repeat(3, 1fr); gap: .7rem .8rem; margin-top: .3rem; }
+.check-item {
+  display: flex; align-items: center; gap: .55rem;
+  font-size: .8rem; color: var(--ink2); cursor: pointer;
+  padding: .45rem .6rem; border-radius: 4px;
+  border: 1px solid var(--border); background: var(--bg);
+  transition: border-color .2s, background .2s;
+  user-select: none;
+}
+.check-item:hover { border-color: rgba(200,40,30,.3); background: rgba(200,40,30,.03); }
+.check-item.checked { border-color: var(--red); background: rgba(200,40,30,.06); }
+.check-item input[type="checkbox"] {
+  width: 15px; height: 15px; min-width: 15px;
+  accent-color: var(--red); cursor: pointer;
+  flex-shrink: 0; margin: 0;
+}
+
+/* Radio group */
+.radio-group { display: flex; gap: 1.5rem; margin-top: .3rem; flex-wrap: wrap; }
+.radio-item {
+  display: flex; align-items: center; gap: .45rem;
+  font-size: .82rem; color: var(--ink2); cursor: pointer;
+}
+.radio-item input[type="radio"] {
+  width: 16px; height: 16px; min-width: 16px;
+  accent-color: var(--red); cursor: pointer; padding: 0;
+}
+
+/* Terms */
+.terms-row {
+  display: flex; align-items: flex-start; gap: .8rem;
+  margin-bottom: 1.6rem; margin-top: .8rem;
+}
+.terms-row input[type="checkbox"] {
+  width: 18px; height: 18px; min-width: 18px;
+  accent-color: var(--red); margin-top: 2px; cursor: pointer; padding: 0;
+}
+.terms-row span {
+  font-size: .78rem; color: var(--muted); line-height: 1.6;
+}
+.terms-row span .req { color: var(--red); }
+
+/* Buttons */
+.form-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-submit {
+  flex: 1; min-width: 180px;
+  background: var(--red); color: white;
+  border: 2px solid var(--red); border-radius: 4px;
+  padding: .85rem 2rem; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  transition: background .2s, color .2s, transform .15s;
+  box-shadow: 0 4px 18px var(--red-glow);
+}
+.btn-submit:hover:not(:disabled) { background: transparent; color: var(--red); transform: translateY(-1px); }
+.btn-submit:disabled { opacity: .6; cursor: not-allowed; }
+.btn-reset {
+  flex: 1; min-width: 140px;
+  background: transparent; color: var(--ink2);
+  border: 2px solid var(--border); border-radius: 4px;
+  padding: .85rem 2rem; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  transition: border-color .2s, color .2s;
+}
+.btn-reset:hover { border-color: var(--ink2); }
+
+/* Feedback */
+.form-feedback {
+  display: none; padding: 1rem 1.2rem; border-radius: var(--radius);
+  font-size: .82rem; font-weight: 500; margin-top: 1rem;
+}
+.form-feedback.success { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+.form-feedback.error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer {
+  background: var(--ink); color: rgba(255,255,255,.35);
+  border-top: 2px solid var(--red);
+}
+.footer-inner {
+  max-width: 1280px; margin: 0 auto; width: 100%;
+  padding: 3rem 4rem 2rem;
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  align-items: center; gap: 2rem;
+}
+.footer-logo img { height: 40px; display: block; }
+footer p { font-size: .72rem; text-align: center; }
+.footer-social { display: flex; gap: .8rem; justify-content: flex-end; }
+.footer-social a {
+  width: 38px; height: 38px; border: 1px solid rgba(255,255,255,.1);
+  border-radius: 4px; display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,.35); text-decoration: none;
+  font-size: .7rem; font-weight: 700; letter-spacing: .04em;
+  transition: border-color .2s, color .2s, background .2s;
+}
+.footer-social a:hover { border-color: var(--red); color: white; background: rgba(200,40,30,.1); }
+.footer-bottom {
+  max-width: 1280px; margin: 0 auto; width: 100%; padding: 1.2rem 4rem;
+  border-top: 1px solid rgba(255,255,255,.06);
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: .68rem; color: rgba(255,255,255,.2);
+}
+
+/* WhatsApp */
+.wpp-btn {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 300;
+  background: #25D366; color: white; width: 52px; height: 52px;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 24px rgba(37,211,102,.4);
+  text-decoration: none; transition: transform .2s;
+  animation: wpp-pulse 3s infinite;
+}
+.wpp-btn:hover { transform: scale(1.1); }
+@keyframes wpp-pulse {
+  0%,100% { box-shadow: 0 4px 24px rgba(37,211,102,.4); }
+  50%      { box-shadow: 0 4px 38px rgba(37,211,102,.65); }
+}
+
+/* Reveal */
+[data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+[data-reveal].revealed { opacity: 1; transform: translateY(0); }
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .page-hero-inner, .form-section-inner, .benefits-inner { padding-left: 2.5rem; padding-right: 2.5rem; }
+  .footer-inner { padding: 2.5rem 2.5rem 1.5rem; }
+  .footer-bottom { padding: 1rem 2.5rem; }
+  .benefits-inner { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 900px) {
+  nav { padding: 0 1.5rem; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .mobile-menu { display: flex; }
+  .page-hero-inner { flex-direction: column; align-items: flex-start; padding: 3rem 1.5rem 2.5rem; }
+  .form-section-inner { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .benefits-inner { padding: 0 1.5rem; }
+  .fgrid-2, .fgrid-3 { grid-template-columns: 1fr; }
+  .fspan2 { grid-column: span 1; }
+  .checkbox-group { grid-template-columns: repeat(2, 1fr); }
+  .footer-inner { grid-template-columns: 1fr; text-align: center; padding: 2rem 1.5rem 1.5rem; gap: 1.5rem; }
+  .footer-social { justify-content: center; }
+  .footer-bottom { flex-direction: column; gap: .5rem; padding: 1rem 1.5rem; text-align: center; }
+}
+@media (max-width: 600px) {
+  :root { --nav-h: 60px; }
+  .nav-logo img { height: 38px; }
+  .form-section-inner { padding-left: 1.2rem; padding-right: 1.2rem; }
+  .form-card { padding: 1.8rem 1.2rem; }
+  .benefits-inner { padding: 0 1.2rem; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .checkbox-group { grid-template-columns: 1fr 1fr; }
+  .form-actions { flex-direction: column; }
+  .btn-submit, .btn-reset { min-width: unset; }
+  .footer-inner { padding: 1.8rem 1.2rem 1.2rem; }
+  .footer-bottom { padding: .8rem 1.2rem; }
+  .wpp-btn { bottom: 1.2rem; right: 1.2rem; width: 46px; height: 46px; }
+}
+@media (max-width: 400px) {
+  .benefits-inner { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="logo50.png" alt="Gráfica Santa Edwiges">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#produtos">Produtos</a></li>
+      <li><a href="index.html#diferenciais">Diferenciais</a></li>
+      <li><a href="index.html#tecnologia">Tecnologia</a></li>
+      <li><a href="trabalhe-conosco.html" class="active">Trabalhe Conosco</a></li>
+      <li><a href="index.html#contato">Contato</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="https://api.whatsapp.com/send?phone=5515981759000" class="nav-cta" target="_blank">Solicitar Orçamento</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#produtos" class="mobile-link">Produtos</a>
+  <a href="index.html#diferenciais" class="mobile-link">Diferenciais</a>
+  <a href="index.html#tecnologia" class="mobile-link">Tecnologia</a>
+  <a href="trabalhe-conosco.html" class="mobile-link">Trabalhe Conosco</a>
+  <a href="index.html#contato" class="mobile-link">Contato</a>
+  <a href="https://api.whatsapp.com/send?phone=5515981759000" class="nav-cta" target="_blank">Solicitar Orçamento</a>
+</div>
+
+<!-- PAGE HERO -->
+<header class="page-hero">
+  <div class="page-hero-inner">
+    <div>
+      <p class="page-hero-eyebrow">Faça parte do time</p>
+      <h1 class="page-hero-title">TRABALHE<br><span class="red">CONOSCO</span></h1>
+      <p class="page-hero-sub">Com 51 anos de mercado, somos uma das maiores gráficas do interior de SP. Buscamos profissionais comprometidos que queiram crescer com a gente.</p>
+    </div>
+    <a href="index.html" class="page-hero-back">← Voltar ao site</a>
+  </div>
+
+  <!-- Perks marquee -->
+  <div class="perks-strip">
+    <div class="perks-track">
+      <span>Ambiente profissional</span><span>Plano de crescimento</span>
+      <span>Cultura colaborativa</span><span>Parque gráfico moderno</span>
+      <span>Estabilidade</span><span>Equipe experiente</span>
+      <span>Ambiente profissional</span><span>Plano de crescimento</span>
+      <span>Cultura colaborativa</span><span>Parque gráfico moderno</span>
+      <span>Estabilidade</span><span>Equipe experiente</span>
+    </div>
+  </div>
+</header>
+
+<!-- BENEFITS -->
+<div class="benefits-section">
+  <div class="benefits-inner">
+    <div class="benefit-card" data-reveal>
+      <div class="benefit-icon">💼</div>
+      <div class="benefit-title">Ambiente Profissional</div>
+      <p class="benefit-desc">Estrutura industrial moderna com 5.500 m² e equipe experiente.</p>
+    </div>
+    <div class="benefit-card" data-reveal>
+      <div class="benefit-icon">📈</div>
+      <div class="benefit-title">Plano de Crescimento</div>
+      <p class="benefit-desc">Desenvolvimento contínuo e oportunidades reais de progressão.</p>
+    </div>
+    <div class="benefit-card" data-reveal>
+      <div class="benefit-icon">🤝</div>
+      <div class="benefit-title">Cultura Colaborativa</div>
+      <p class="benefit-desc">Respeito ao colaborador e valorização do trabalho em equipe.</p>
+    </div>
+    <div class="benefit-card" data-reveal>
+      <div class="benefit-icon">🏭</div>
+      <div class="benefit-title">Tecnologia de Ponta</div>
+      <p class="benefit-desc">Trabalhe com máquinas e processos modernos de impressão gráfica.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FORM SECTION -->
+<section class="form-section">
+  <div class="form-section-inner">
+
+    <!-- Progress header -->
+    <div class="form-progress-header" data-reveal>
+      <div class="form-progress-top">
+        <span class="form-progress-label">Formulário de Candidatura</span>
+        <span class="form-progress-pct" id="progressPct">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <p class="form-progress-note">Preencha todos os campos obrigatórios (*)</p>
+    </div>
+
+    <!-- Form card -->
+    <div class="form-card" data-reveal>
+
+      <!-- Feedback messages -->
+      <div id="msgSucesso" class="form-feedback success">
+        ✓ Candidatura enviada com sucesso! Nossa equipe de RH entrará em contato em breve.
+      </div>
+      <div id="msgErro" class="form-feedback error">
+        Erro ao enviar. Verifique os dados e tente novamente.
+      </div>
+
+      <form id="formCandidatura" action="https://api.web3forms.com/submit" method="POST">
+        <!-- Web3Forms campos obrigatórios -->
+        <input type="hidden" name="access_key" value="d0b8c0c6-a23f-4b6e-a47c-cb768a18e75b">
+        <input type="hidden" name="subject" value="Nova Candidatura — Trabalhe Conosco">
+        <input type="hidden" name="from_name" value="Site Gráfica Santa Edwiges">
+        <input type="hidden" name="redirect" value="false">
+        <!-- Anti-spam -->
+        <input type="checkbox" name="botcheck" style="display:none;">
+        <!-- Campo oculto para soft skills (preenchido por JS) -->
+        <input type="hidden" name="habilidades_comportamentais" id="softskillsHidden">
+
+        <!-- 1. DADOS PESSOAIS -->
+        <div class="fsec">
+          <h2 class="fsec-title"><span class="fsec-num">1</span> Dados Pessoais</h2>
+          <div class="fgrid fgrid-2">
+            <div class="fgroup">
+              <label>Nome completo <span class="req">*</span></label>
+              <input type="text" name="nome" placeholder="Digite seu nome completo" required>
+            </div>
+            <div class="fgroup">
+              <label>E-mail <span class="req">*</span></label>
+              <input type="email" name="email" placeholder="seu@email.com" required>
+            </div>
+            <div class="fgroup">
+              <label>Telefone / WhatsApp <span class="req">*</span></label>
+              <input type="tel" name="telefone" placeholder="(15) 99999-9999" required>
+            </div>
+            <div class="fgroup">
+              <label>Data de nascimento</label>
+              <input type="date" name="nascimento">
+            </div>
+            <div class="fgroup">
+              <label>Gênero</label>
+              <select name="genero">
+                <option value="">Selecione</option>
+                <option value="feminino">Feminino</option>
+                <option value="masculino">Masculino</option>
+                <option value="naobinario">Não-binário</option>
+                <option value="prefiro_nao_dizer">Prefiro não dizer</option>
+              </select>
+            </div>
+            <div class="fgroup">
+              <label>Cidade / Estado</label>
+              <input type="text" name="cidade" placeholder="Ex: Tietê, SP">
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. INFORMAÇÕES PROFISSIONAIS -->
+        <div class="fsec">
+          <h2 class="fsec-title"><span class="fsec-num">2</span> Informações Profissionais</h2>
+          <div class="fgrid fgrid-2">
+            <div class="fgroup">
+              <label>Nível de escolaridade <span class="req">*</span></label>
+              <select name="escolaridade" required>
+                <option value="">Selecione</option>
+                <option value="ensino_fundamental">Ensino Fundamental</option>
+                <option value="ensino_medio">Ensino Médio Completo</option>
+                <option value="tecnologo">Tecnólogo</option>
+                <option value="graduacao">Graduação em andamento</option>
+                <option value="graduacao_completa">Graduação Completa</option>
+                <option value="pos_graduacao">Pós-graduação / MBA</option>
+                <option value="mestrado_doutorado">Mestrado / Doutorado</option>
+              </select>
+            </div>
+            <div class="fgroup">
+              <label>Área de formação</label>
+              <input type="text" name="formacao" placeholder="Ex: Administração, Design Gráfico...">
+            </div>
+            <div class="fgroup">
+              <label>Cargo pretendido <span class="req">*</span></label>
+              <input type="text" name="cargo" required placeholder="Ex: Operador de Máquina, Designer...">
+            </div>
+            <div class="fgroup">
+              <label>Experiência na área gráfica</label>
+              <select name="experiencia">
+                <option value="">Selecione</option>
+                <option value="nenhuma">Nenhuma experiência</option>
+                <option value="menos_1">Menos de 1 ano</option>
+                <option value="1_3">1 a 3 anos</option>
+                <option value="3_5">3 a 5 anos</option>
+                <option value="5_10">5 a 10 anos</option>
+                <option value="mais_10">Mais de 10 anos</option>
+              </select>
+            </div>
+            <div class="fgroup fspan2">
+              <label>Último salário (opcional)</label>
+              <div class="prefix-wrap">
+                <span class="prefix">R$</span>
+                <input type="number" name="salario" placeholder="0,00">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. HABILIDADES -->
+        <div class="fsec">
+          <h2 class="fsec-title"><span class="fsec-num">3</span> Habilidades &amp; Competências</h2>
+          <div class="fgrid">
+            <div class="fgroup">
+              <label>Conhecimentos na área gráfica</label>
+              <textarea name="habilidades_tecnicas" placeholder="Ex: Adobe Photoshop, CorelDRAW, operação de máquinas offset, acabamento, pré-impressão..."></textarea>
+              <span class="field-hint">Separe por vírgula</span>
+            </div>
+            <div class="fgroup">
+              <label>Habilidades comportamentais</label>
+              <div class="checkbox-group" id="softskillsGroup">
+                <label class="check-item"><input type="checkbox" class="softskill-cb" value="Atenção aos detalhes"><span>Atenção aos detalhes</span></label>
+                <label class="check-item"><input type="checkbox" class="softskill-cb" value="Trabalho em equipe"><span>Trabalho em equipe</span></label>
+                <label class="check-item"><input type="checkbox" class="softskill-cb" value="Organização"><span>Organização</span></label>
+                <label class="check-item"><input type="checkbox" class="softskill-cb" value="Proatividade"><span>Proatividade</span></label>
+                <label class="check-item"><input type="checkbox" class="softskill-cb" value="Comprometimento"><span>Comprometimento</span></label>
+                <label class="check-item"><input type="checkbox" class="softskill-cb" value="Criatividade"><span>Criatividade</span></label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. DISPONIBILIDADE -->
+        <div class="fsec">
+          <h2 class="fsec-title"><span class="fsec-num">4</span> Disponibilidade</h2>
+          <div class="fgrid fgrid-2">
+            <div class="fgroup">
+              <label>Disponibilidade para início</label>
+              <select name="disponibilidade_inicio">
+                <option value="imediato">Imediato</option>
+                <option value="15_dias">Em até 15 dias</option>
+                <option value="30_dias">Em até 30 dias</option>
+                <option value="60_dias">Mais de 60 dias</option>
+              </select>
+            </div>
+            <div class="fgroup">
+              <label>Pretensão salarial</label>
+              <div class="prefix-wrap">
+                <span class="prefix">R$</span>
+                <input type="number" name="pretensao_salarial" placeholder="0,00">
+              </div>
+            </div>
+            <div class="fgroup">
+              <label>Turno desejado</label>
+              <select name="turno">
+                <option value="">Selecione</option>
+                <option value="manha">Manhã (08h às 17h)</option>
+                <option value="tarde">Tarde (14h às 22h)</option>
+                <option value="noite">Noite (22h às 06h)</option>
+                <option value="qualquer">Qualquer turno</option>
+              </select>
+            </div>
+            <div class="fgroup">
+              <label>Possui experiência com máquinas gráficas?</label>
+              <select name="experiencia_maquinas">
+                <option value="">Selecione</option>
+                <option value="sim">Sim</option>
+                <option value="nao">Não</option>
+                <option value="basico">Conhecimento básico</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. PERGUNTAS COMPLEMENTARES -->
+        <div class="fsec">
+          <h2 class="fsec-title"><span class="fsec-num">5</span> Perguntas Complementares</h2>
+          <div class="fgrid">
+            <div class="fgroup">
+              <label>Por que você quer trabalhar na Gráfica Santa Edwiges?</label>
+              <textarea name="motivacao" placeholder="Conte um pouco sobre sua motivação..."></textarea>
+            </div>
+            <div class="fgroup">
+              <label>Disponibilidade para horas extras?</label>
+              <div class="radio-group">
+                <label class="radio-item"><input type="radio" name="hora_extra" value="sim"> Sim</label>
+                <label class="radio-item"><input type="radio" name="hora_extra" value="nao"> Não</label>
+                <label class="radio-item"><input type="radio" name="hora_extra" value="as_vezes"> Às vezes</label>
+              </div>
+            </div>
+            <div class="fgroup">
+              <label>Possui algum curso técnico ou profissionalizante?</label>
+              <textarea name="cursos" rows="2" placeholder="Ex: Curso de Operador de Máquinas Gráficas, SENAI..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- CURRÍCULO NOTE -->
+        <div class="fsec">
+          <div class="fgroup">
+            <label>Envio de currículo</label>
+            <p style="font-size:.8rem;color:var(--muted);line-height:1.65;background:var(--bg2);padding:.8rem 1rem;border-radius:4px;border:1px solid var(--border);">
+              📎 Após enviar este formulário, encaminhe seu currículo (PDF ou DOC) para<br>
+              <strong style="color:var(--ink);">rh@gruposantaedwiges.com.br</strong> com o assunto <em>"Candidatura – [Seu Nome]"</em>.
+            </p>
+          </div>
+        </div>
+
+        <!-- TERMS + SUBMIT -->
+        <label class="terms-row">
+          <input type="checkbox" name="termos" required>
+          <span>Declaro que as informações fornecidas são verdadeiras e autorizo o contato para fins do processo seletivo da Gráfica Santa Edwiges. <span class="req">*</span></span>
+        </label>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-submit" id="submitBtn">Enviar Candidatura →</button>
+          <button type="reset" class="btn-reset">Limpar formulário</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo">
+      <img src="logo50.png" alt="Gráfica Santa Edwiges">
+    </a>
+    <p>© 2026 Grupo Santa Edwiges. Todos os direitos reservados.<br>Fundada em 1975 · Tietê, SP</p>
+    <div class="footer-social">
+      <a href="http://www.facebook.com/grupostaedwiges" target="_blank" title="Facebook">fb</a>
+      <a href="https://instagram.com/gruposantaedwiges_" target="_blank" title="Instagram">ig</a>
+      <a href="https://www.youtube.com/user/grupostaedwiges" target="_blank" title="YouTube">yt</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Gráfica Santa Edwiges — 51 anos imprimindo qualidade</span>
+    <span>Tietê · Sorocaba · Campinas</span>
+  </div>
+</footer>
+
+<!-- WHATSAPP -->
+<a href="https://api.whatsapp.com/send?phone=5515981759000" class="wpp-btn" target="_blank" title="Fale pelo WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+// ─── NAV ───
+const nav = document.getElementById('main-nav');
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+document.querySelectorAll('.mobile-link').forEach(a => {
+  a.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+
+// ─── REVEAL ───
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('revealed'), i * 80);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+
+// ─── CHECKBOXES SOFTSKILLS ───
+// Coleta os selecionados e atualiza o campo hidden antes de enviar
+const softCbs = document.querySelectorAll('.softskill-cb');
+const softHidden = document.getElementById('softskillsHidden');
+
+softCbs.forEach(cb => {
+  cb.addEventListener('change', function() {
+    // Marca visual no card
+    this.closest('.check-item').classList.toggle('checked', this.checked);
+    // Atualiza o campo hidden
+    const selecionados = [...softCbs].filter(c => c.checked).map(c => c.value);
+    softHidden.value = selecionados.length ? selecionados.join(', ') : '';
+  });
+});
+
+// ─── BARRA DE PROGRESSO ───
+const form = document.getElementById('formCandidatura');
+const progressFill = document.getElementById('progressFill');
+const progressPct = document.getElementById('progressPct');
+
+function atualizarProgresso() {
+  const obrigatorios = form.querySelectorAll('[required]');
+  let preenchidos = 0;
+  obrigatorios.forEach(campo => {
+    if (campo.type === 'checkbox') { if (campo.checked) preenchidos++; }
+    else if (campo.value.trim()) preenchidos++;
+  });
+  const pct = Math.round((preenchidos / obrigatorios.length) * 100);
+  progressFill.style.width = pct + '%';
+  progressPct.textContent = pct + '%';
+}
+form.querySelectorAll('input, select, textarea').forEach(el => {
+  el.addEventListener('input', atualizarProgresso);
+  el.addEventListener('change', atualizarProgresso);
+});
+atualizarProgresso();
+
+// ─── ENVIO DO FORMULÁRIO (Web3Forms) ───
+const msgSucesso = document.getElementById('msgSucesso');
+const msgErro = document.getElementById('msgErro');
+const submitBtn = document.getElementById('submitBtn');
+
+form.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  msgSucesso.style.display = 'none';
+  msgErro.style.display = 'none';
+
+  // Garante que softskills está atualizado
+  const selecionados = [...softCbs].filter(c => c.checked).map(c => c.value);
+  softHidden.value = selecionados.length ? selecionados.join(', ') : 'Nenhuma selecionada';
+
+  const textoOriginal = submitBtn.textContent;
+  submitBtn.textContent = '⏳ Enviando...';
+  submitBtn.disabled = true;
+
+  try {
+    const dados = new FormData(form);
+    const resposta = await fetch(form.action, {
+      method: 'POST',
+      body: dados,
+      headers: { 'Accept': 'application/json' }
+    });
+    const resultado = await resposta.json();
+
+    if (resultado.success) {
+      msgSucesso.style.display = 'block';
+      form.reset();
+      // Limpa marcações visuais dos checkboxes
+      softCbs.forEach(cb => cb.closest('.check-item').classList.remove('checked'));
+      softHidden.value = '';
+      atualizarProgresso();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      msgErro.textContent = resultado.message || 'Erro ao enviar. Verifique os dados e tente novamente.';
+      msgErro.style.display = 'block';
+    }
+  } catch (err) {
+    msgErro.textContent = 'Erro de conexão. Verifique sua internet e tente novamente.';
+    msgErro.style.display = 'block';
+  } finally {
+    submitBtn.textContent = textoOriginal;
+    submitBtn.disabled = false;
+  }
+});
+
+// ─── MÁSCARA TELEFONE ───
+const telInput = form.querySelector('input[name="telefone"]');
+if (telInput) {
+  telInput.addEventListener('input', function() {
+    let v = this.value.replace(/\D/g, '');
+    if (v.length > 11) v = v.slice(0, 11);
+    if (v.length > 2)  v = '(' + v.slice(0,2) + ') ' + v.slice(2);
+    if (v.length > 10) v = v.slice(0,10) + '-' + v.slice(10);
+    this.value = v;
+  });
+}
+</script>
+</body>
+</html>
