@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfólio — Gráfica Santa Edwiges</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:       #F5F1EB;
+  --bg2:      #EDE8DF;
+  --bg3:      #E6E0D5;
+  --ink:      #111010;
+  --ink2:     #2A2825;
+  --ink3:     #4A4742;
+  --red:      #C8281E;
+  --red-dk:   #8F1912;
+  --red-glow: rgba(200,40,30,.18);
+  --gold:     #B8860B;
+  --gold-lt:  #D4A017;
+  --muted:    #7A7060;
+  --white:    #FFFFFF;
+  --border:   rgba(0,0,0,.09);
+  --nav-h:    72px;
+  --radius:   6px;
+  --ease:     cubic-bezier(.77,0,.175,1);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg); color: var(--ink);
+  overflow-x: hidden; font-size: 16px; line-height: 1.6;
+}
+
+/* ═══════════════ NAV ═══════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  height: var(--nav-h);
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 2.5rem;
+  background: rgba(245,241,235,.96);
+  backdrop-filter: blur(20px) saturate(160%);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow .3s, background .3s;
+}
+nav.scrolled { box-shadow: 0 2px 32px rgba(0,0,0,.09); }
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; max-width: 1280px;
+}
+.nav-logo img { height: 48px; display: block; transition: height .3s; }
+nav.scrolled .nav-logo img { height: 38px; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  text-decoration: none; color: var(--ink2);
+  font-size: .72rem; font-weight: 600; letter-spacing: .12em;
+  text-transform: uppercase; transition: color .2s;
+  position: relative; padding-bottom: 4px;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 1.5px; background: var(--red);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .25s var(--ease);
+}
+.nav-links a:hover { color: var(--red); }
+.nav-links a:hover::after,
+.nav-links a.active::after { transform: scaleX(1); }
+.nav-links a.active { color: var(--red); }
+.nav-right { display: flex; align-items: center; gap: 1.2rem; }
+.nav-cta {
+  background: var(--red); color: white;
+  padding: .55rem 1.4rem; border-radius: 3px;
+  font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  text-decoration: none; border: 2px solid var(--red);
+  transition: background .2s, transform .15s, box-shadow .2s;
+  box-shadow: 0 2px 14px var(--red-glow); white-space: nowrap;
+}
+.nav-cta:hover { background: transparent; color: var(--red); transform: translateY(-1px); }
+
+/* hamburger */
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--ink); transition: .3s; }
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu {
+  display: none; position: fixed; inset: 0; top: var(--nav-h);
+  background: rgba(245,241,235,.98); backdrop-filter: blur(20px);
+  z-index: 400; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2.5rem; padding: 3rem;
+  transform: translateY(-100%); transition: transform .4s var(--ease);
+}
+.mobile-menu.open { transform: translateY(0); }
+.mobile-menu a {
+  font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem;
+  letter-spacing: .06em; color: var(--ink); text-decoration: none; transition: color .2s;
+}
+.mobile-menu a:hover { color: var(--red); }
+.mobile-menu .nav-cta { font-size: .85rem; padding: .7rem 2rem; }
+
+/* ═══════════════ PAGE HERO ═══════════════ */
+.page-hero {
+  padding-top: var(--nav-h);
+  background: var(--ink);
+  position: relative; overflow: hidden;
+}
+.page-hero-inner {
+  max-width: 1280px; margin: 0 auto; padding: 4rem 4rem 3.5rem;
+  position: relative; z-index: 2;
+}
+.page-hero::before {
+  content: 'PORTFÓLIO';
+  position: absolute; right: 2rem; top: 50%; transform: translateY(-50%);
+  font-family: 'Bebas Neue', sans-serif; font-size: 10rem;
+  color: rgba(255,255,255,.03); letter-spacing: .1em;
+  pointer-events: none; user-select: none; line-height: 1;
+}
+.page-hero-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: .66rem; font-weight: 700; letter-spacing: .22em;
+  text-transform: uppercase; color: #FF7060; margin-bottom: 1.2rem;
+}
+.page-hero-tag::before { content: ''; width: 24px; height: 1.5px; background: var(--red); }
+.page-hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 5vw, 5.5rem);
+  line-height: .92; letter-spacing: .02em; color: white;
+  margin-bottom: 1rem;
+}
+.page-hero h1 .red { color: var(--red); }
+.page-hero-sub {
+  font-size: .88rem; font-weight: 300; color: rgba(255,255,255,.5);
+  max-width: 520px; line-height: 1.75;
+}
+
+/* breadcrumb */
+.breadcrumb {
+  display: flex; align-items: center; gap: .6rem; margin-top: 2rem;
+  font-size: .68rem; color: rgba(255,255,255,.3); font-weight: 500;
+  letter-spacing: .06em; text-transform: uppercase;
+}
+.breadcrumb a { color: rgba(255,255,255,.3); text-decoration: none; transition: color .2s; }
+.breadcrumb a:hover { color: rgba(255,255,255,.7); }
+.breadcrumb span { color: rgba(255,255,255,.6); }
+.breadcrumb::before { display: none; }
+
+/* ─── marquee ─── */
+.marquee-wrap {
+  background: var(--red); padding: .55rem 0; overflow: hidden;
+}
+.marquee-track {
+  display: flex; gap: 3.5rem; white-space: nowrap;
+  animation: marquee 26s linear infinite; width: max-content;
+}
+.marquee-track span {
+  font-family: 'Bebas Neue', sans-serif; font-size: .78rem;
+  letter-spacing: .18em; color: white; text-transform: uppercase;
+  display: flex; align-items: center; gap: 1.5rem;
+}
+.marquee-track span::after { content: '✦'; opacity: .4; font-size: .55rem; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ═══════════════ FILTER BAR ═══════════════ */
+.filter-section {
+  background: var(--bg); padding: 2.5rem 0 0;
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: var(--nav-h); z-index: 100;
+}
+.filter-inner {
+  max-width: 1280px; margin: 0 auto;
+  padding: 0 4rem 1.8rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.filter-label {
+  font-size: .65rem; font-weight: 700; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--muted); white-space: nowrap;
+}
+.filter-pills {
+  display: flex; gap: .5rem; flex-wrap: wrap; flex: 1;
+}
+.filter-pill {
+  padding: .38rem 1rem; border-radius: 20px;
+  border: 1.5px solid var(--border); background: white;
+  font-size: .68rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--ink3); cursor: pointer;
+  transition: background .2s, border-color .2s, color .2s, transform .15s;
+  white-space: nowrap;
+}
+.filter-pill:hover { border-color: var(--red); color: var(--red); transform: translateY(-1px); }
+.filter-pill.active {
+  background: var(--red); border-color: var(--red);
+  color: white; box-shadow: 0 2px 12px var(--red-glow);
+}
+.filter-count {
+  font-size: .68rem; color: var(--muted); white-space: nowrap;
+  font-weight: 500;
+}
+#countBadge { font-weight: 700; color: var(--ink); }
+
+/* ═══════════════ GRID ═══════════════ */
+.portfolio-section { padding: 3.5rem 0 5.5rem; }
+.portfolio-inner {
+  max-width: 1280px; margin: 0 auto; padding: 0 4rem;
+}
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* ─── card ─── */
+.pf-card {
+  background: white; border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden; cursor: pointer;
+  transition: transform .3s var(--ease), box-shadow .3s, border-color .3s;
+  position: relative;
+  opacity: 0; transform: translateY(20px);
+  animation: cardIn .5s ease forwards;
+}
+.pf-card.hidden { display: none; }
+@keyframes cardIn { to { opacity: 1; transform: translateY(0); } }
+.pf-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 48px rgba(0,0,0,.12);
+  border-color: rgba(200,40,30,.2);
+}
+.pf-card-img {
+  aspect-ratio: 4/3; overflow: hidden; position: relative;
+  background: var(--bg2);
+}
+.pf-card-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .5s var(--ease);
+  display: block;
+}
+.pf-card:hover .pf-card-img img { transform: scale(1.06); }
+
+/* overlay on hover */
+.pf-card-overlay {
+  position: absolute; inset: 0;
+  background: rgba(17,16,16,.55);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity .3s;
+}
+.pf-card:hover .pf-card-overlay { opacity: 1; }
+.pf-overlay-icon {
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 2px solid white; background: rgba(255,255,255,.12);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 1.1rem;
+  transform: scale(.7); transition: transform .3s var(--ease);
+}
+.pf-card:hover .pf-overlay-icon { transform: scale(1); }
+
+.pf-card-body { padding: 1rem 1.2rem 1.1rem; }
+.pf-card-cat {
+  font-size: .6rem; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--red); margin-bottom: .3rem;
+}
+.pf-card-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.25rem; letter-spacing: .03em; color: var(--ink);
+  line-height: 1.1;
+}
+.pf-card-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: .65rem;
+  font-size: .62rem; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--red);
+  text-decoration: none;
+  transition: gap .2s;
+}
+.pf-card-cta:hover { gap: 10px; }
+.pf-card-cta::after { content: '→'; }
+
+/* ─── category accent bar ─── */
+.pf-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: var(--red); transform: scaleX(0); transform-origin: left;
+  transition: transform .3s var(--ease);
+}
+.pf-card:hover::after { transform: scaleX(1); }
+
+/* ═══════════════ LIGHTBOX ═══════════════ */
+.lightbox {
+  position: fixed; inset: 0; z-index: 900;
+  background: rgba(10,9,9,.92); backdrop-filter: blur(12px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.5rem;
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s;
+}
+.lightbox.open { opacity: 1; pointer-events: all; }
+.lb-inner {
+  position: relative; max-width: 900px; width: 100%;
+  transform: scale(.92); transition: transform .35s var(--ease);
+}
+.lightbox.open .lb-inner { transform: scale(1); }
+.lb-img {
+  width: 100%; max-height: 80vh; object-fit: contain;
+  border-radius: var(--radius); display: block;
+  box-shadow: 0 32px 80px rgba(0,0,0,.6);
+}
+.lb-caption {
+  margin-top: 1.2rem; text-align: center;
+  font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem;
+  letter-spacing: .06em; color: white;
+}
+.lb-sub {
+  text-align: center; font-size: .75rem;
+  color: rgba(255,255,255,.35); margin-top: .3rem; letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.lb-close {
+  position: absolute; top: -2.5rem; right: 0;
+  background: none; border: 1px solid rgba(255,255,255,.2); color: white;
+  width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
+  font-size: 1rem; display: flex; align-items: center; justify-content: center;
+  transition: background .2s, border-color .2s;
+}
+.lb-close:hover { background: var(--red); border-color: var(--red); }
+.lb-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+  color: white; width: 44px; height: 44px; border-radius: 50%;
+  cursor: pointer; font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s; backdrop-filter: blur(4px);
+}
+.lb-arrow:hover { background: var(--red); border-color: var(--red); }
+.lb-arrow.lb-prev { left: -3.5rem; }
+.lb-arrow.lb-next { right: -3.5rem; }
+
+/* ═══════════════ CTA BAND ═══════════════ */
+.cta-band {
+  background: var(--ink); padding: 4rem 0;
+  text-align: center;
+}
+.cta-band-inner {
+  max-width: 680px; margin: 0 auto; padding: 0 2rem;
+}
+.cta-band h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  color: white; letter-spacing: .03em; line-height: 1.05;
+  margin-bottom: .8rem;
+}
+.cta-band h2 .red { color: var(--red); }
+.cta-band p {
+  font-size: .88rem; color: rgba(255,255,255,.45);
+  line-height: 1.75; margin-bottom: 2rem;
+}
+.cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--red); color: white;
+  padding: .75rem 1.8rem; border: 2px solid var(--red); border-radius: 3px;
+  font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  text-decoration: none; transition: all .2s; box-shadow: 0 4px 20px var(--red-glow);
+}
+.btn-primary:hover { background: transparent; color: var(--red); }
+.btn-outline-dark {
+  background: transparent; color: rgba(255,255,255,.6);
+  padding: .75rem 1.8rem; border: 2px solid rgba(255,255,255,.18); border-radius: 3px;
+  font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  text-decoration: none; transition: all .2s;
+}
+.btn-outline-dark:hover { border-color: white; color: white; background: rgba(255,255,255,.05); }
+
+/* ═══════════════ FOOTER ═══════════════ */
+footer {
+  background: var(--ink); color: rgba(255,255,255,.35);
+  border-top: 2px solid var(--red);
+}
+.footer-inner {
+  max-width: 1280px; margin: 0 auto; width: 100%;
+  padding: 3rem 4rem 2rem;
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  align-items: center; gap: 2rem;
+}
+.footer-logo img { height: 40px; display: block; }
+footer p { font-size: .72rem; text-align: center; }
+.footer-social { display: flex; gap: .8rem; justify-content: flex-end; }
+.footer-social a {
+  width: 38px; height: 38px; border: 1px solid rgba(255,255,255,.1);
+  border-radius: 4px; display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,.35); text-decoration: none;
+  font-size: .7rem; font-weight: 700; letter-spacing: .04em;
+  transition: border-color .2s, color .2s, background .2s;
+}
+.footer-social a:hover { border-color: var(--red); color: white; background: rgba(200,40,30,.1); }
+.footer-bottom {
+  max-width: 1280px; margin: 0 auto; width: 100%; padding: 1.2rem 4rem;
+  border-top: 1px solid rgba(255,255,255,.06);
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: .68rem; color: rgba(255,255,255,.2);
+}
+
+/* ═══════════════ WHATSAPP ═══════════════ */
+.wpp-btn {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 300;
+  background: #25D366; color: white; width: 52px; height: 52px;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 24px rgba(37,211,102,.4);
+  text-decoration: none; transition: transform .2s;
+  animation: wpp-pulse 3s infinite;
+}
+.wpp-btn:hover { transform: scale(1.1); }
+@keyframes wpp-pulse {
+  0%,100% { box-shadow: 0 4px 24px rgba(37,211,102,.4); }
+  50%      { box-shadow: 0 4px 38px rgba(37,211,102,.65); }
+}
+
+/* ═══════════════ REVEAL ═══════════════ */
+[data-reveal] {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+[data-reveal].revealed { opacity: 1; transform: translateY(0); }
+
+/* ─── PLACEHOLDER IMAGE STYLE ─── */
+.pf-card-img img[src$=".jpg"]:not([src^="data"]) {
+  background: var(--bg2);
+}
+/* Banner de instrução */
+.img-notice {
+  background: linear-gradient(135deg, #1a1f2c 0%, #2d1a0a 100%);
+  border-left: 3px solid var(--gold-lt);
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius);
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 2rem; flex-wrap: wrap;
+}
+.img-notice-icon { font-size: 1.4rem; flex-shrink: 0; }
+.img-notice-text { flex: 1; min-width: 200px; }
+.img-notice-text strong { display: block; color: var(--gold-lt); font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; margin-bottom: .2rem; }
+.img-notice-text span { font-size: .75rem; color: rgba(255,255,255,.5); line-height: 1.55; }
+.img-notice-close { background: none; border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.4); width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: .75rem; flex-shrink: 0; transition: all .2s; }
+.img-notice-close:hover { background: var(--red); border-color: var(--red); color: white; }
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+@media (max-width: 1100px) {
+  .portfolio-grid { grid-template-columns: repeat(3, 1fr); }
+  .portfolio-inner, .filter-inner { padding-left: 2.5rem; padding-right: 2.5rem; }
+  .page-hero-inner { padding-left: 2.5rem; padding-right: 2.5rem; }
+  .lb-arrow.lb-prev { left: -1.5rem; }
+  .lb-arrow.lb-next { right: -1.5rem; }
+}
+@media (max-width: 900px) {
+  nav { padding: 0 1.5rem; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .mobile-menu { display: flex; }
+  .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .portfolio-inner, .filter-inner { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .page-hero-inner { padding: 3rem 1.5rem 2.5rem; }
+  .page-hero::before { display: none; }
+  .filter-section { position: static; }
+  .footer-inner { grid-template-columns: 1fr; text-align: center; padding: 2rem 1.5rem 1.5rem; gap: 1.5rem; }
+  .footer-social { justify-content: center; }
+  .footer-bottom { flex-direction: column; gap: .5rem; padding: 1rem 1.5rem; text-align: center; }
+  .lb-arrow { display: none; }
+}
+@media (max-width: 520px) {
+  .portfolio-grid { grid-template-columns: 1fr; }
+  .filter-pills { gap: .4rem; }
+  .filter-pill { font-size: .62rem; padding: .32rem .8rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="logo50.jpg" alt="Gráfica Santa Edwiges">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#produtos">Produtos</a></li>
+      <li><a href="index.html#diferenciais">Diferenciais</a></li>
+      <li><a href="index.html#tecnologia">Tecnologia</a></li>
+      <li><a href="index.html#trabalhe">Trabalhe Conosco</a></li>
+      <li><a href="portfolio.html" class="active">Portfólio</a></li>
+      <li><a href="index.html#contato">Contato</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="https://api.whatsapp.com/send?phone=5515981759000" class="nav-cta" target="_blank">Solicitar Orçamento</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#produtos" class="mobile-link">Produtos</a>
+  <a href="index.html#diferenciais" class="mobile-link">Diferenciais</a>
+  <a href="index.html#tecnologia" class="mobile-link">Tecnologia</a>
+  <a href="index.html#trabalhe" class="mobile-link">Trabalhe Conosco</a>
+  <a href="portfolio.html" class="mobile-link">Portfólio</a>
+  <a href="index.html#contato" class="mobile-link">Contato</a>
+  <a href="https://api.whatsapp.com/send?phone=5515981759000" class="nav-cta" target="_blank">Solicitar Orçamento</a>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <p class="page-hero-tag">Trabalhos realizados</p>
+    <h1>NOSSO <span class="red">PORTFÓLIO</span></h1>
+    <p class="page-hero-sub">
+      Mais de 51 anos produzindo materiais gráficos com excelência para empresas de todo o Brasil. Conheça alguns dos nossos trabalhos.
+    </p>
+    <div class="breadcrumb">
+      <a href="index.html">Início</a>
+      <span>›</span>
+      <span>Portfólio</span>
+    </div>
+  </div>
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span>Catálogos</span><span>Folders</span><span>Embalagens</span>
+      <span>Apostilas</span><span>Offset</span><span>Digital</span>
+      <span>Serigrafia</span><span>Lâminas</span><span>Wobblers</span>
+      <span>Pastas</span><span>Hot Stamping</span><span>Verniz UV</span>
+      <span>Catálogos</span><span>Folders</span><span>Embalagens</span>
+      <span>Apostilas</span><span>Offset</span><span>Digital</span>
+      <span>Serigrafia</span><span>Lâminas</span><span>Wobblers</span>
+      <span>Pastas</span><span>Hot Stamping</span><span>Verniz UV</span>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="filter-section" id="filterSection">
+  <div class="filter-inner">
+    <span class="filter-label">Filtrar por</span>
+    <div class="filter-pills" id="filterPills">
+      <button class="filter-pill active" data-cat="all">Todos</button>
+      <button class="filter-pill" data-cat="editorial">Editorial</button>
+      <button class="filter-pill" data-cat="embalagem">Embalagens</button>
+      <button class="filter-pill" data-cat="marketing">Marketing</button>
+      <button class="filter-pill" data-cat="corporativo">Corporativo</button>
+      <button class="filter-pill" data-cat="identidade">Identidade</button>
+    </div>
+    <span class="filter-count"><span id="countBadge">18</span> trabalhos</span>
+  </div>
+</div>
+
+<!-- PORTFOLIO GRID -->
+<section class="portfolio-section">
+  <div class="portfolio-inner">
+    <div class="img-notice" id="imgNotice">
+      <span class="img-notice-icon">💡</span>
+      <div class="img-notice-text">
+        <strong>Imagens locais não encontradas</strong>
+        <span>Salve as fotos do portfólio na pasta <code style="background:rgba(255,255,255,.08);padding:1px 6px;border-radius:3px;font-size:.72rem">img/</code> com os nomes <code style="background:rgba(255,255,255,.08);padding:1px 6px;border-radius:3px;font-size:.72rem">pf-01-folder.jpg</code>, <code style="background:rgba(255,255,255,.08);padding:1px 6px;border-radius:3px;font-size:.72rem">pf-02-catalogo.jpg</code> … e as imagens aparecerão automaticamente.</span>
+      </div>
+      <button class="img-notice-close" onclick="document.getElementById('imgNotice').style.display='none'" title="Fechar">✕</button>
+    </div>
+    <div class="portfolio-grid" id="portfolioGrid">
+      <div class="pf-card" data-cat="marketing" style="animation-delay:0.05s" data-title="Folder" data-img="img/pf-01-folder.jpg" data-fallback="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23EDE8DF'/%3E%3Crect x='0' y='0' width='800' height='4' fill='%23C8281E'/%3E%3Ccircle cx='400' cy='260' r='70' fill='%23C8281E' opacity='0.1'/%3E%3Ctext x='400' y='280' text-anchor='middle' font-size='64' font-family='Arial'%3E📄%3C/text%3E%3Ctext x='400' y='370' text-anchor='middle' font-family='Arial,sans-serif' font-size='28' font-weight='600' fill='%232A2825'%3EFolder%3C/text%3E%3Ctext x='400' y='406' text-anchor='middle' font-family='Arial,sans-serif' font-size='14' fill='%237A7060'%3EGráfica Santa Edwiges%3C/text%3E%3C/svg%3E">
+        <div class="pf-card-img">
+          <img src="img/pf-01-folder.jpg" alt="Folder" loading="lazy" onerror="this.src=this.closest('.pf-card').dataset.fallback">
+          <div class="pf-card-overlay"><div class="pf-overlay-icon">⤢</div></div>
+        </div>
+        <div class="pf-card-body">
+          <div class="pf-card-cat">Marketing</div>
+          <div class="pf-card-title">Folder</div>
+          <a href="#" class="pf-card-cta">Ver detalhe</a>
+        </div>
+      </div>
+      <div class="pf-card" data-cat="marketing" style="animation-delay:0.1s" data-title="Catálogo" data-img="img/pf-02-catalogo.jpg" data-fallback="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23EDE8DF'/%3E%3Crect x='0' y='0' width='800' height='4' fill='%23C8281E'/%3E%3Ccircle cx='400' cy='260' r='70' fill='%23C8281E' opacity='0.1'/%3E%3Ctext x='400' y='280' text-anchor='middle' font-size='64' font-family='Arial'%3E📖%3C/text%3E%3Ctext x='400' y='370' text-anchor='middle' font-family='Arial,sans-serif' font-size='28' font-weight='600' fill='%232A2825'%3ECatálogo%3C/text%3E%3Ctext x='400' y='406' text-anchor='middle' font-family='Arial,sans-serif' font-size='14' fill='%237A7060'%3EGráfica Santa Edwiges%3C/text%3E%3C/svg%3E">
+        <div class="pf-card-img">
+          <img src="img/pf-02-catalogo.jpg" alt="Catálogo" loading="lazy" onerror="this.src=this.closest('.pf-card').dataset.fallback">
+          <div class="pf-card-overlay"><div class="pf-overlay-icon">⤢</div></div>
+        </div>
+        <div class="pf-card-body">
+          <div class="pf-card-cat">Marketing</div>
+          <div class="pf-card-title">Catálogo</div>
+          <a href="#" class="pf-card-cta">Ver detalhe</a>
+        </div>
+      </div>
+      <div class="pf-card" data-cat="marketing" style="animation-delay:0.15s" data-title="Mala Direta" data-img="img/pf-03-mala-direta.jpg" data-fallback="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23EDE8DF'/%3E%3Crect x='0' y='0' width='800' height='4' fill='%23C8281E'/%3E%3Ccircle cx='400' cy='260' r='70' fill='%23C8281E' opacity='0.1'/%3E%3Ctext x='400' y='280' text-anchor='middle' font-size='64' font-family='Arial'%3E✉️%3C/text%3E%3Ctext x='400' y='370' text-anchor='middle' font-family='Arial,sans-serif' font-size='28' font-weight='600' fill='%232A2825'%3EMala Direta%3C/text%3E%3Ctext x='400' y='406' text-anchor='middle' font-family='Arial,sans-serif' font-size='14' fill='%237A7060'%3EGráfica Santa Edwiges%3C/text%3E%3C/svg%3E">
+        <div class="pf-card-img">
+          <img src="img/pf-03-mala-direta.jpg" alt="Mala Direta" loading="lazy" onerror="this.src=this.closest('.pf-card').dataset.fallback">
+          <div class="pf-card-overlay"><div class="pf-overlay-icon">⤢</div></div>
+        </div>
+        <div class="pf-card-body">
+          <div class="pf-card-cat">Marketing</div>
+          <div class="pf-card-title">Mala Direta</div>
+          <a href="#" class="pf-card-cta">Ver detalhe</a>
+        </div>
+      </div>
+      <div class="pf-card" data-cat="corporativo" style="animation-delay:0.2s" data-title="Pasta" data-img="img/pf-04-pasta.jpg" data-fallback="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23EDE8DF'/%3E%3Crect x='0' y='0' width='800' height='4' fill='%234A7AB5'/%3E%3Ccircle cx='400' cy='260' r='70' fill='%234A7AB5' opacity='0.1'/%3E%3Ctext x='400' y='280' text-anchor='middle' font-size='64' font-family='Arial'%3E🗂️%3C/text%3E%3Ctext x='400' y='370' text-anchor='middle' font-family='Arial,sans-serif' font-size='28' font-weight='600' fill='%232A2825'%3EPasta%3C/text%3E%3Ctext x='400' y='406' text-anchor='middle' font-family='Arial,sans-serif' font-size='14' fill='%237A7060'%3EGráfica Santa Edwiges%3C/text%3E%3C/svg%3E">
+        <div class="pf-card-img">
+          <img src="img/pf-04-pasta.jpg" alt="Pasta" loading="lazy" onerror="this.src=this.closest('.pf-card').dataset.fallback">
+          <div class="pf-card-overlay"><div class="pf-overlay-icon">⤢</div></div>
+        </div>
+        <div class="pf-card-body">
+          <div class="pf-card-cat">Corporativo</div>
+          <div class="pf-card-title">Pasta</div>
+          <a href="#" class="pf-card-cta">Ver detalhe</a>
+        </div>
+      </div>
+      <div class="pf-card" data-cat="identidade" style="animation-delay:0.25s" data-title="Envelope" data-img="img/pf-05-envelope.jpg" data-fallback="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23EDE8DF'/%3E%3Crect x='0' y='0' width='800' height='4' fill='%237A7060'/%3E%3Ccircle cx='400' cy='260' r='70' fill='%237A7060' opacity='0.1'/%3E%3Ctext x='400' y='280' text-anchor='middle' font-size='64' font-family='Arial'%3E📬%3C/text%3E%3Ctext x='400' y='370' text-anchor='middle' font-family='Arial,sans-serif' font-size='28' font-weight='600' fill='%232A2825'%3EEnvelope%3C/text%3E%3Ctext x='400' y='406' text-anchor='middle' font-family='Arial,sans-serif' font-size='14' fill='%237A7060'%3EGráfica Santa Edwiges%3C/text%3E%3C/svg%3E">
+        <div class="pf-card-img">
+          <img src="img/pf-05-envelope.jpg" alt="Envelope" loading="lazy" onerror="this.src=this.closest('.pf-card').dataset.fallback">
+          <div class="pf-card-overlay"><div class="pf-overlay-icon">⤢</div></div>
+        </div>
+        <div class="pf-card-body">
+          <div class="pf-card-cat">Identidade</div>
+          <div class="pf-card-title">Envelope</div>
+          <a href="#" class="pf-card-cta">Ver detalhe</a>
+        </div>
+      </div>
+      <div class="pf-card" data-cat="identidade" style="animation-delay:0.3s" data-title="Papel de Carta" data-img="img/pf-06-papel-carta.jpg" data-fallback="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23EDE8DF'/%3E%3Crect x='0' y='0' width='800' height='4' fill='%237A7060'/%3E%3Ccircle cx='400' cy='260' r='70' fill='%237A7060' opacity='0.1'/%3E%3Ctext x='400' y='280' text-anchor='middle' font-size='64' font-family='Arial'%3E📝%3C/text%3E%3Ctext x='400' y='370' text-anchor='middle' font-family='Arial,sans-serif' font-size='28' font-weight='600' fill='%232A2825'%3EPapel de Carta%3C/text%3E%3Ctext x='400' y='406' text-anchor='middle' font-family='Arial,sans-serif' font-size='14' fill='%237A7060'%3EGráfica Santa Edwiges%3C/text%3E%3C/svg%3E">
+        <div class="pf-card-img">
+          <img src="img/pf-06-papel-carta.jpg" alt="Papel de Carta" loading="lazy" onerror="this.src=this.closest('.pf-card').dataset.fallback">
+          <div class="pf-card-overlay"><div class="pf-overlay-icon">⤢</div></div>
+        </div>
+        <div class="pf-card-body">
+          <div class="pf-card-cat">Identidade</div>
+          <div class="pf-card-title">Papel de Carta</div>
+          <a href="#" class="pf-card-cta">Ver detalhe</a>
+        </div>
+      </div>
+      <div class="pf-card" data-cat="identidade" style="animation-delay:0.35s" data-title="Cartão de Visita" data-img="img/pf-07-cartao-visita.jpg" data-fallback="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23EDE8DF'/%3E%3Crect x='0' y='0' width='800' height='4' fill='%232A2825'/%3E%3Ccircle cx='400' cy='260' r='70' fill='%232A2825' opacity='0.1'/%3E%3Ctext x='400' y='280' text-anchor='middle' font-size='64' font-family='Arial'%3E🪪%3C/text%3E%3Ctext x='400' y='370' text-anchor='middle' font-family='Arial,sans-serif' font-size='28' font-weight='600' fill='%232A2825'%3ECartão de Visita%3C/text%3E%3Ctext x='400' y='406' text-anchor='middle' font-family='Arial,sans-serif' font-size='14' fill='%237A7060'%3EGráfica Santa Edwiges%3C/text%3E%3C/svg%3E">
+        <div class="pf-card-img">
+          <img src="img/pf-07-cartao-visita.jpg" alt="Cartão de Visita" loading="lazy" onerror="this.src=this.closest('.pf-card').dataset.fallback">
+          <div class="pf-card-overlay"><div class="pf-overlay-icon">⤢</div></div>
+        </div>
+        <div class="pf-card-body">
+          <div class="pf-card-cat">Identidade</div>
+          <div class="pf-card-title">Cartão de Visita</div>
+          <a href="#" class="pf-card-cta">Ver detalhe</a>
+        </div>
+      </div>
+      <div class="pf-card" data-cat="marketing" style="animation-delay:0.4s" data-title="Folheto" data-img="img/pf-08-folheto.jpg" data-fallback="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23EDE8DF'/%3E%3Crect x='0' y='0' width='800' height='4' fill='%23C8281E'/%3E%3Ccircle cx='400' cy='260' r='70' fill='%23C8281E' opacity='0.1'/%3E%3Ctext x='400' y='280' text-anchor='middle' font-size='64' font-family='Arial'%3E📰%3C/text%3E%3Ctext x='400' y='370' text-anchor='middle' font-family='Arial,sans-serif' font-size='28' font-weight='600' fill='%232A2825'%3EFolheto%3C/text%3E%3Ctext x='400' y='406' text-anchor='middle' font-family='Arial,sans-serif' font-size='14' fill='%237A7060'%3EGráfica Santa Edwiges%3C/text%3E%3C/svg%3E">
+        <div class="pf-card-img">
+          <img src="img/pf-08-folheto.jpg" alt="Folheto" loading="lazy" onerror="this.src=this.closest('.pf-card').dataset.fallback">
+          <div class="pf-card-overlay"><div class="pf-overlay-icon">⤢</div></div>
+        </div>
+        <div class="pf-card-body">
+          <div class="pf-card-cat">Marketing</div>
+          <div class="pf-card-title">Folheto</div>
+          <a href="#" class="pf-card-cta">Ver detalhe</a>
+        </div>
+      </div>
+      <div class="pf-card" data-cat="marketing" style="animation-delay:0.45s" data-title="Cartaz" data-img="img/pf-09-cartaz.jpg" data-fallback="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23EDE8DF'/%3E%3Crect x='0' y='0' width='800' height='4' fill='%23C8281E'/%3E%3Ccircle cx='400' cy='260' r='70' fill='%23C8281E' opacity='0.1'/%3E%3Ctext x='400' y='280' text-anchor='middle' font-size='64' font-family='Arial'%3E🖼️%3C/text%3E%3Ctext x='400' y='370' text-anchor='middle' font-family='Arial,sans-serif' font-size='28' font-weight='600' fill='%232A2825'%3ECartaz%3C/text%3E%3Ctext x='400' y='406' text-anchor='middle' font-family='Arial,sans-serif' font-size='14' fill='%237A7060'%3EGráfica Santa Edwiges%3C/text%3E%3C/svg%3E">
+        <div class="pf-card-img">
+          <img src="img/pf-09-cartaz.jpg" alt="Cartaz" loading="lazy" onerror="this.src=this.closest('.pf-card').dataset.fallback">
+          <div class="pf-card-overlay"><div class="pf-overlay-icon">⤢</div></div>
+        </div>
+        <div class="pf-card-body">
+          <div class="pf-card-cat">Marketing</div>
+          <div class="pf-card-title">Cartaz</div>
+          <a href="#" class="pf-card-cta">Ver detalhe</a>
+        </div>
+      </div>
+      <div class="pf-card" data-cat="embalagem" style="animation-delay:0.5s" data-title="Rótulo" data-img="img/pf-10-rotulo.jpg" data-fallback="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23EDE8DF'/%3E%3Crect x='0' y='0' width='800' height='4' fill='%234A9B6F'/%3E%3Ccircle cx='400' cy='260' r='70' fill='%234A9B6F' opacity='0.1'/%3E%3Ctext x='400' y='280' text-anchor='middle' font-size='64' font-family='Arial'%3E🏷️%3C/text%3E%3Ctext x='400' y='370' text-anchor='middle' font-family='Arial,sans-serif' font-size='28' font-weight='600' fill='%232A2825'%3ERótulo%3C/text%3E%3Ctext x='400' y='406' text-anchor='middle' font-family='Arial,sans-serif' font-size='14' fill='%237A7060'%3EGráfica Santa Edwiges%3C/text%3E%3C/svg%3E">
+        <div class="pf-card-img">
+          <img src="img/pf-10-rotulo.jpg" alt="Rótulo" loading="lazy" onerror="this.src=this.closest('.pf-card').dataset.fallback">
+          <div class="pf-card-overlay"><div class="pf-overlay-icon">⤢</div></div>
+        </div>
+        <div class="pf-card-body">
+          <div class="pf-card-cat">Embalagem</div>
+          <div class="pf-card-title">Rótulo</div>
+          <a href="#" class="pf-card-cta">Ver detalhe</a>
+        </div>
+      </div>
+      <div class="pf-card" data-cat="embalagem" style="animation-delay:0.55s" data-title="Bula e Tag" data-img="img/pf-11-bula-tag.jpg" data-fallback="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23EDE8DF'/%3E%3Crect x='0' y='0' width='800' height='4' fill='%234A9B6F'/%3E%3Ccircle cx='400' cy='260' r='70' fill='%234A9B6F' opacity='0.1'/%3E%3Ctext x='400' y='280' text-anchor='middle' font-size='64' font-family='Arial'%3E🔖%3C/text%3E%3Ctext x='400' y='370' text-anchor='middle' font-family='Arial,sans-serif' font-size='28' font-weight='600' fill='%232A2825'%3EBula e Tag%3C/text%3E%3Ctext x='400' y='406' text-anchor='middle' font-family='Arial,sans-serif' font-size='14' fill='%237A7060'%3EGráfica Santa Edwiges%3C/text%3E%3C/svg%3E">
+        <div class="pf-card-img">
+          <img src="img/pf-11-bula-tag.jpg" alt="Bula e Tag" loading="lazy" onerror="this.src=this.closest('.pf-card').dataset.fallback">
+          <div class="pf-card-overlay"><div class="pf-overlay-icon">⤢</div></div>
+        </div>
+        <div class="pf-card-body">
+          <div class="pf-card-cat">Embalagem</div>
+          <div class="pf-card-title">Bula e Tag</div>
+          <a href="#" class="pf-card-cta">Ver detalhe</a>
+        </div>
+      </div>
+      <div class="pf-card" data-cat="embalagem" style="animation-delay:0.6s" data-title="Embalagem Especial" data-img="img/pf-12-embalagem.jpg" data-fallback="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23EDE8DF'/%3E%3Crect x='0' y='0' width='800' height='4' fill='%234A9B6F'/%3E%3Ccircle cx='400' cy='260' r='70' fill='%234A9B6F' opacity='0.1'/%3E%3Ctext x='400' y='280' text-anchor='middle' font-size='64' font-family='Arial'%3E📦%3C/text%3E%3Ctext x='400' y='370' text-anchor='middle' font-family='Arial,sans-serif' font-size='28' font-weight='600' fill='%232A2825'%3EEmbalagem Especial%3C/text%3E%3Ctext x='400' y='406' text-anchor='middle' font-family='Arial,sans-serif' font-size='14' fill='%237A7060'%3EGráfica Santa Edwiges%3C/text%3E%3C/svg%3E">
+        <div class="pf-card-img">
+          <img src="img/pf-12-embalagem.jpg" alt="Embalagem Especial" loading="lazy" onerror="this.src=this.closest('.pf-card').dataset.fallback">
+          <div class="pf-card-overlay"><div class="pf-overlay-icon">⤢</div></div>
+        </div>
+        <div class="pf-card-body">
+          <div class="pf-card-cat">Embalagem</div>
+          <div class="pf-card-title">Embalagem Especial</div>
+          <a href="#" class="pf-card-cta">Ver detalhe</a>
+        </div>
+      </div>
+      <div class="pf-card" data-cat="editorial" style="animation-delay:0.65s" data-title="Livro" data-img="img/pf-13-livro.jpg" data-fallback="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23EDE8DF'/%3E%3Crect x='0' y='0' width='800' height='4' fill='%238B6914'/%3E%3Ccircle cx='400' cy='260' r='70' fill='%238B6914' opacity='0.1'/%3E%3Ctext x='400' y='280' text-anchor='middle' font-size='64' font-family='Arial'%3E📚%3C/text%3E%3Ctext x='400' y='370' text-anchor='middle' font-family='Arial,sans-serif' font-size='28' font-weight='600' fill='%232A2825'%3ELivro%3C/text%3E%3Ctext x='400' y='406' text-anchor='middle' font-family='Arial,sans-serif' font-size='14' fill='%237A7060'%3EGráfica Santa Edwiges%3C/text%3E%3C/svg%3E">
+        <div class="pf-card-img">
+          <img src="img/pf-13-livro.jpg" alt="Livro" loading="lazy" onerror="this.src=this.closest('.pf-card').dataset.fallback">
+          <div class="pf-card-overlay"><div class="pf-overlay-icon">⤢</div></div>
+        </div>
+        <div class="pf-card-body">
+          <div class="pf-card-cat">Editorial</div>
+          <div class="pf-card-title">Livro</div>
+          <a href="#" class="pf-card-cta">Ver detalhe</a>
+        </div>
+      </div>
+      <div class="pf-card" data-cat="editorial" style="animation-delay:0.7s" data-title="Revista" data-img="img/pf-14-revista.jpg" data-fallback="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23EDE8DF'/%3E%3Crect x='0' y='0' width='800' height='4' fill='%238B6914'/%3E%3Ccircle cx='400' cy='260' r='70' fill='%238B6914' opacity='0.1'/%3E%3Ctext x='400' y='280' text-anchor='middle' font-size='64' font-family='Arial'%3E📔%3C/text%3E%3Ctext x='400' y='370' text-anchor='middle' font-family='Arial,sans-serif' font-size='28' font-weight='600' fill='%232A2825'%3ERevista%3C/text%3E%3Ctext x='400' y='406' text-anchor='middle' font-family='Arial,sans-serif' font-size='14' fill='%237A7060'%3EGráfica Santa Edwiges%3C/text%3E%3C/svg%3E">
+        <div class="pf-card-img">
+          <img src="img/pf-14-revista.jpg" alt="Revista" loading="lazy" onerror="this.src=this.closest('.pf-card').dataset.fallback">
+          <div class="pf-card-overlay"><div class="pf-overlay-icon">⤢</div></div>
+        </div>
+        <div class="pf-card-body">
+          <div class="pf-card-cat">Editorial</div>
+          <div class="pf-card-title">Revista</div>
+          <a href="#" class="pf-card-cta">Ver detalhe</a>
+        </div>
+      </div>
+      <div class="pf-card" data-cat="editorial" style="animation-delay:0.75s" data-title="Jornal" data-img="img/pf-15-jornal.jpg" data-fallback="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23EDE8DF'/%3E%3Crect x='0' y='0' width='800' height='4' fill='%238B6914'/%3E%3Ccircle cx='400' cy='260' r='70' fill='%238B6914' opacity='0.1'/%3E%3Ctext x='400' y='280' text-anchor='middle' font-size='64' font-family='Arial'%3E🗞️%3C/text%3E%3Ctext x='400' y='370' text-anchor='middle' font-family='Arial,sans-serif' font-size='28' font-weight='600' fill='%232A2825'%3EJornal%3C/text%3E%3Ctext x='400' y='406' text-anchor='middle' font-family='Arial,sans-serif' font-size='14' fill='%237A7060'%3EGráfica Santa Edwiges%3C/text%3E%3C/svg%3E">
+        <div class="pf-card-img">
+          <img src="img/pf-15-jornal.jpg" alt="Jornal" loading="lazy" onerror="this.src=this.closest('.pf-card').dataset.fallback">
+          <div class="pf-card-overlay"><div class="pf-overlay-icon">⤢</div></div>
+        </div>
+        <div class="pf-card-body">
+          <div class="pf-card-cat">Editorial</div>
+          <div class="pf-card-title">Jornal</div>
+          <a href="#" class="pf-card-cta">Ver detalhe</a>
+        </div>
+      </div>
+      <div class="pf-card" data-cat="corporativo" style="animation-delay:0.8s" data-title="Manual" data-img="img/pf-16-manual.jpg" data-fallback="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23EDE8DF'/%3E%3Crect x='0' y='0' width='800' height='4' fill='%234A7AB5'/%3E%3Ccircle cx='400' cy='260' r='70' fill='%234A7AB5' opacity='0.1'/%3E%3Ctext x='400' y='280' text-anchor='middle' font-size='64' font-family='Arial'%3E📋%3C/text%3E%3Ctext x='400' y='370' text-anchor='middle' font-family='Arial,sans-serif' font-size='28' font-weight='600' fill='%232A2825'%3EManual%3C/text%3E%3Ctext x='400' y='406' text-anchor='middle' font-family='Arial,sans-serif' font-size='14' fill='%237A7060'%3EGráfica Santa Edwiges%3C/text%3E%3C/svg%3E">
+        <div class="pf-card-img">
+          <img src="img/pf-16-manual.jpg" alt="Manual" loading="lazy" onerror="this.src=this.closest('.pf-card').dataset.fallback">
+          <div class="pf-card-overlay"><div class="pf-overlay-icon">⤢</div></div>
+        </div>
+        <div class="pf-card-body">
+          <div class="pf-card-cat">Corporativo</div>
+          <div class="pf-card-title">Manual</div>
+          <a href="#" class="pf-card-cta">Ver detalhe</a>
+        </div>
+      </div>
+      <div class="pf-card" data-cat="editorial" style="animation-delay:0.85s" data-title="Caderno" data-img="img/pf-17-caderno.jpg" data-fallback="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23EDE8DF'/%3E%3Crect x='0' y='0' width='800' height='4' fill='%238B6914'/%3E%3Ccircle cx='400' cy='260' r='70' fill='%238B6914' opacity='0.1'/%3E%3Ctext x='400' y='280' text-anchor='middle' font-size='64' font-family='Arial'%3E📓%3C/text%3E%3Ctext x='400' y='370' text-anchor='middle' font-family='Arial,sans-serif' font-size='28' font-weight='600' fill='%232A2825'%3ECaderno%3C/text%3E%3Ctext x='400' y='406' text-anchor='middle' font-family='Arial,sans-serif' font-size='14' fill='%237A7060'%3EGráfica Santa Edwiges%3C/text%3E%3C/svg%3E">
+        <div class="pf-card-img">
+          <img src="img/pf-17-caderno.jpg" alt="Caderno" loading="lazy" onerror="this.src=this.closest('.pf-card').dataset.fallback">
+          <div class="pf-card-overlay"><div class="pf-overlay-icon">⤢</div></div>
+        </div>
+        <div class="pf-card-body">
+          <div class="pf-card-cat">Editorial</div>
+          <div class="pf-card-title">Caderno</div>
+          <a href="#" class="pf-card-cta">Ver detalhe</a>
+        </div>
+      </div>
+      <div class="pf-card" data-cat="corporativo" style="animation-delay:0.9s" data-title="Agenda" data-img="img/pf-18-agenda.jpg" data-fallback="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23EDE8DF'/%3E%3Crect x='0' y='0' width='800' height='4' fill='%234A7AB5'/%3E%3Ccircle cx='400' cy='260' r='70' fill='%234A7AB5' opacity='0.1'/%3E%3Ctext x='400' y='280' text-anchor='middle' font-size='64' font-family='Arial'%3E📅%3C/text%3E%3Ctext x='400' y='370' text-anchor='middle' font-family='Arial,sans-serif' font-size='28' font-weight='600' fill='%232A2825'%3EAgenda%3C/text%3E%3Ctext x='400' y='406' text-anchor='middle' font-family='Arial,sans-serif' font-size='14' fill='%237A7060'%3EGráfica Santa Edwiges%3C/text%3E%3C/svg%3E">
+        <div class="pf-card-img">
+          <img src="img/pf-18-agenda.jpg" alt="Agenda" loading="lazy" onerror="this.src=this.closest('.pf-card').dataset.fallback">
+          <div class="pf-card-overlay"><div class="pf-overlay-icon">⤢</div></div>
+        </div>
+        <div class="pf-card-body">
+          <div class="pf-card-cat">Corporativo</div>
+          <div class="pf-card-title">Agenda</div>
+          <a href="#" class="pf-card-cta">Ver detalhe</a>
+        </div>
+      </div>
+
+    </div><!-- /.portfolio-grid -->
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visualizar imagem">
+  <div class="lb-inner">
+    <button class="lb-close" id="lbClose" aria-label="Fechar">✕</button>
+    <button class="lb-arrow lb-prev" id="lbPrev" aria-label="Anterior">&#8592;</button>
+    <img class="lb-img" id="lbImg" src="" alt="" onerror="this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'600\'><rect width=\'800\' height=\'600\' fill=\'%23EDE8DF\'/></svg>'">
+    <button class="lb-arrow lb-next" id="lbNext" aria-label="Próximo">&#8594;</button>
+    <div class="lb-caption" id="lbCaption"></div>
+    <div class="lb-sub" id="lbSub"></div>
+  </div>
+</div>
+
+<!-- CTA BAND -->
+<div class="cta-band" data-reveal>
+  <div class="cta-band-inner">
+    <h2>PRONTO PARA <span class="red">IMPRIMIR</span><br>SEU PROJETO?</h2>
+    <p>Nossa equipe comercial está pronta para transformar sua ideia em um material impresso de alta qualidade. Solicite um orçamento sem compromisso.</p>
+    <div class="cta-btns">
+      <a href="https://api.whatsapp.com/send?phone=5515981759000" class="btn-primary" target="_blank">Falar pelo WhatsApp</a>
+      <a href="index.html#contato" class="btn-outline-dark">Enviar por e-mail</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo">
+      <img src="logo50.jpg" alt="Gráfica Santa Edwiges">
+    </a>
+    <p>© 2026 Grupo Santa Edwiges. Todos os direitos reservados.<br>Fundada em 1975 · Tietê, SP</p>
+    <div class="footer-social">
+      <a href="http://www.facebook.com/grupostaedwiges" target="_blank" title="Facebook">fb</a>
+      <a href="https://instagram.com/gruposantaedwiges_" target="_blank" title="Instagram">ig</a>
+      <a href="https://www.youtube.com/user/grupostaedwiges" target="_blank" title="YouTube">yt</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Gráfica Santa Edwiges — 51 anos imprimindo qualidade</span>
+    <span>Tietê · Sorocaba · Campinas</span>
+  </div>
+</footer>
+
+<!-- WHATSAPP -->
+<a href="https://api.whatsapp.com/send?phone=5515981759000" class="wpp-btn" target="_blank" title="Fale pelo WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+// ─── NAV ───
+const nav = document.getElementById('main-nav');
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+document.querySelectorAll('.mobile-link').forEach(a => a.addEventListener('click', () => {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+  document.body.style.overflow = '';
+}));
+
+// ─── FILTER ───
+const pills   = document.querySelectorAll('.filter-pill');
+const cards   = document.querySelectorAll('.pf-card');
+const counter = document.getElementById('countBadge');
+
+pills.forEach(pill => {
+  pill.addEventListener('click', () => {
+    pills.forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+    const cat = pill.dataset.cat;
+    let visible = 0;
+    cards.forEach((card, i) => {
+      const match = cat === 'all' || card.dataset.cat === cat;
+      if (match) {
+        card.classList.remove('hidden');
+        card.style.animationDelay = (i * 0.04) + 's';
+        card.style.animation = 'none';
+        requestAnimationFrame(() => { card.style.animation = ''; });
+        visible++;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+    counter.textContent = visible;
+  });
+});
+
+// ─── LIGHTBOX ───
+const lb        = document.getElementById('lightbox');
+const lbImg     = document.getElementById('lbImg');
+const lbCaption = document.getElementById('lbCaption');
+const lbSub     = document.getElementById('lbSub');
+const lbClose   = document.getElementById('lbClose');
+const lbPrev    = document.getElementById('lbPrev');
+const lbNext    = document.getElementById('lbNext');
+let lbIndex = 0;
+let lbItems = [];
+
+function buildLbItems() {
+  lbItems = [...document.querySelectorAll('.pf-card:not(.hidden)')];
+}
+
+function openLb(idx) {
+  buildLbItems();
+  lbIndex = idx;
+  showLb();
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function showLb() {
+  const card = lbItems[lbIndex];
+  // Try local img first; onerror on the img tag handles fallback to SVG
+  lbImg.src = '';
+  lbImg.alt = card.dataset.title;
+  // Use a small trick: set src via timeout so onerror fires cleanly
+  setTimeout(() => { lbImg.src = card.dataset.img; }, 10);
+  lbCaption.textContent = card.dataset.title;
+  const cat = card.querySelector('.pf-card-cat').textContent;
+  lbSub.textContent = cat + ' · Gráfica Santa Edwiges';
+}
+
+function closeLb() {
+  lb.classList.remove('open');
+  document.body.style.overflow = '';
+  setTimeout(() => { lbImg.src = ''; }, 300);
+}
+
+cards.forEach((card, i) => {
+  card.addEventListener('click', () => {
+    buildLbItems();
+    const visIdx = lbItems.indexOf(card);
+    if (visIdx !== -1) openLb(visIdx);
+  });
+});
+
+lbClose.addEventListener('click', closeLb);
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+lbPrev.addEventListener('click', e => { e.stopPropagation(); lbIndex = (lbIndex - 1 + lbItems.length) % lbItems.length; showLb(); });
+lbNext.addEventListener('click', e => { e.stopPropagation(); lbIndex = (lbIndex + 1) % lbItems.length; showLb(); });
+
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft')  { lbIndex = (lbIndex - 1 + lbItems.length) % lbItems.length; showLb(); }
+  if (e.key === 'ArrowRight') { lbIndex = (lbIndex + 1) % lbItems.length; showLb(); }
+});
+
+// ─── AUTO-HIDE NOTICE WHEN IMAGES LOAD ───
+(function() {
+  const notice = document.getElementById('imgNotice');
+  if (!notice) return;
+  let loaded = 0;
+  document.querySelectorAll('.pf-card-img img').forEach(img => {
+    img.addEventListener('load', () => {
+      // If src is not a data: URI (i.e. real image loaded)
+      if (!img.src.startsWith('data:')) {
+        loaded++;
+        if (loaded >= 3) notice.style.display = 'none';
+      }
+    });
+  });
+})();
+
+// ─── REVEAL ───
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
